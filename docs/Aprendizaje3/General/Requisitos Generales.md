@@ -42,7 +42,7 @@ Git es un sistema de control de versiones distribuido que te permite gestionar y
 link de descarga:
 [https://git-scm.com/downloads](https://git-scm.com/downloads)
 leer para la instalación:
-[[Instalación de Git]]
+[Instalación de Git](./Instalación%20de%20Git.md)
 
 
 # **Crear cuenta de Jira**
@@ -67,4 +67,4 @@ https://dbeaver.io/files/dbeaver-ce-latest-x86_64-setup.exe
 Puedes instalar cualquier visualizador de base de datos que quieras.
 
 
-Después de esto puedes ir al introductorio de [[semana1| nest]] o [[Semana 1| html y css]]
+Después de esto puedes ir al introductorio de [ nest](../Back/nest/semana1.md) o [html y css](../Front/Basico/Semana%201.md)

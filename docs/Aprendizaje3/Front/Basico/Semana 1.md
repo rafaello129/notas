@@ -4,7 +4,7 @@ Ver video introductorio acerca de la programación web, solo se verán las prime
 **Duración del Curso:** 4 horas y media
 
 Apoyarse del documento que interpreta el Curso:
- [[Interpretación del curso]]
+ [Interpretación del curso](./Interpretación%20del%20curso.md)
 
 **Curso:** [Curso de HTML y CSS desde CERO (Completo)](https://www.youtube.com/watch?v=ELSm-G201Ls)
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">

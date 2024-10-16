@@ -447,4 +447,4 @@ p {
 ---
 
 Para terminar, tenemos un ejemplo guiado usando los puntos ya vistos:
-[[Ejemplo guiado ]]
+[Ejemplo guiado ](./Ejemplo%20guiado.md)
