@@ -1,0 +1,19 @@
+site_name: Notas
+theme:
+  name: material
+
+nav:
+  - Back:
+      - Nest:
+          - "Aprendizaje3/Back/nest/Nest semana1 Guía.md"
+          - "Aprendizaje3/Back/nest/semana1.md"
+  - Front:
+      - Basico:
+          - "Aprendizaje3/Front/Basico/Ejemplo guiado.md"
+          - "Aprendizaje3/Front/Basico/Interpretación del curso.md"
+          - "Aprendizaje3/Front/Basico/Semana 1.md"
+  
+         
+  - General:
+      - "Aprendizaje3/General/Instalación de Git.md"
+      - "Aprendizaje3/General/Requisitos Generales.md"
