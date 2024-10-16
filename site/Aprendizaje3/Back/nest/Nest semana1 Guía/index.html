@@ -1,0 +1,2902 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="../semana1/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
+    
+    
+      
+        <title>NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript - Notas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nestjs-creacion-de-una-api-rest-con-mysql-typeorm-y-typescript" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Notas" class="md-header__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Notas" class="md-nav__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Notas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Back
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Back
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Nest
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nest
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es NestJS?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-usar-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Por qué usar NestJS?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es TypeORM?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características Principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación y Configuración
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-nestjs-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Nest.js CLI?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-del-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación del CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-un-nuevo-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de un Nuevo Proyecto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-basicos-del-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Básicos del CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Docker Compose?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-docker-y-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de Docker y Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-docker-compose-para-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Docker Compose para MySQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-de-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-de-usar-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizar-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizar Base de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualizar Base de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramienta-recomendada-dbeaver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Herramienta Recomendada: DBeaver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-dbeaver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de DBeaver
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-resource-cats" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Resource Cats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Resource Cats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-recursos-con-nestjs-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de Recursos con Nest.js CLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generar-un-recurso-cats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generar un Recurso: Cats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-generada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura Generada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduccion-a-class-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a Class Validator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-en-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso en NestJS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-class-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar Class Validator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conexion-a-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conexión a Base de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conexión a Base de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-la-conexion-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de la Conexión con TypeORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-para-configurar-la-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos para Configurar la Conexión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de la Configuración
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-el-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es el Repository Pattern?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-del-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios del Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-en-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación en NestJS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-una-entity-en-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es una Entity en TypeORM?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicion-de-una-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definición de una Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-columnas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Columnas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-entre-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones entre Entities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-utilizar-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Utilizar Entities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilizando-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizando Repository Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utilizando Repository Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integracion-del-repository-pattern-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integración del Repository Pattern en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-metodos-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplos de Métodos en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-utilizar-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de Utilizar Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-cat-dto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Cat DTO
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Cat DTO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-dto" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es un DTO?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-un-createcatdto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de un CreateCatDto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-dtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar DTOs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Soft Delete
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Soft Delete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Soft Delete?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-soft-delete-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Soft Delete con TypeORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Soft Delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-la-funcionalidad-de-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de la Funcionalidad de Actualización
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-para-implementar-la-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos para Implementar la Actualización
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-para-la-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones para la Actualización
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relaciones-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones SQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relaciones SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduccion-a-las-relaciones-en-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a las Relaciones en SQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-relaciones-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Relaciones con TypeORM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación de Relaciones con TypeORM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-uno-a-muchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones Uno a Muchos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-muchos-a-muchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones Muchos a Muchos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-utilizar-relaciones-en-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Utilizar Relaciones en SQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-al-implementar-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones al Implementar Relaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recapitulacion-de-los-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recapitulación de los Conceptos Clave
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recursos-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursos Adicionales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semana1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con con Nest JS:
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Front
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Front
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basico
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basico
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Ejemplo%20guiado/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejemplo guiado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Interpretaci%C3%B3n%20del%20curso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interpretación del curso
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Semana%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con HTML y CSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Instalaci%C3%B3n%20de%20Git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Requisitos%20Generales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalar Visual Studio Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es NestJS?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-usar-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Por qué usar NestJS?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es TypeORM?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características Principales
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación y Configuración
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-nestjs-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Nest.js CLI?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-del-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación del CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creacion-de-un-nuevo-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de un Nuevo Proyecto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-basicos-del-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Básicos del CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-es-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Docker Compose?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-docker-y-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de Docker y Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-docker-compose-para-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de Docker Compose para MySQL
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-de-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-de-usar-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar Docker Compose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizar-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizar Base de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualizar Base de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramienta-recomendada-dbeaver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Herramienta Recomendada: DBeaver
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion-de-dbeaver" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de DBeaver
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-resource-cats" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Resource Cats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLI Resource Cats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-recursos-con-nestjs-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de Recursos con Nest.js CLI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generar-un-recurso-cats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generar un Recurso: Cats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-generada" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estructura Generada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduccion-a-class-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a Class Validator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-en-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso en NestJS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-class-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar Class Validator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conexion-a-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conexión a Base de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conexión a Base de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-la-conexion-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración de la Conexión con TypeORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-para-configurar-la-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos para Configurar la Conexión
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de la Configuración
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Repository Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-el-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es el Repository Pattern?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-del-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios del Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-en-nestjs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación en NestJS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-una-entity-en-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es una Entity en TypeORM?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicion-de-una-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definición de una Entity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-columnas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Columnas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-entre-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones entre Entities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-utilizar-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Utilizar Entities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilizando-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizando Repository Pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utilizando Repository Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#integracion-del-repository-pattern-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integración del Repository Pattern en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-metodos-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplos de Métodos en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficios-de-utilizar-repository-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Beneficios de Utilizar Repository Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-cat-dto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create Cat DTO
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create Cat DTO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-un-dto" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es un DTO?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-un-createcatdto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación de un CreateCatDto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-usar-dtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Usar DTOs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Soft Delete
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Soft Delete">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es Soft Delete?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-soft-delete-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Soft Delete con TypeORM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-soft-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Soft Delete
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Update">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-la-funcionalidad-de-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de la Funcionalidad de Actualización
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos-para-implementar-la-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasos para Implementar la Actualización
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-para-la-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones para la Actualización
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relaciones-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones SQL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relaciones SQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduccion-a-las-relaciones-en-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a las Relaciones en SQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-relaciones-con-typeorm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Relaciones con TypeORM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación de Relaciones con TypeORM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-uno-a-muchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones Uno a Muchos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-muchos-a-muchos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relaciones Muchos a Muchos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas-de-utilizar-relaciones-en-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas de Utilizar Relaciones en SQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consideraciones-al-implementar-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consideraciones al Implementar Relaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumen
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recapitulacion-de-los-conceptos-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recapitulación de los Conceptos Clave
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recursos-adicionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recursos Adicionales
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="nestjs-creacion-de-una-api-rest-con-mysql-typeorm-y-typescript">NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript</h1>
+<h3 id="que-es-nestjs">¿Qué es NestJS?</h3>
+<p>NestJS es un framework progresivo de Node.js para construir aplicaciones de servidor eficientes y escalables. Está construido con TypeScript y se inspira en Angular, lo que facilita la adopción para aquellos familiarizados con este framework frontend. NestJS utiliza una arquitectura modular, lo que promueve una separación clara de responsabilidades y facilita la mantenibilidad del código.</p>
+<h3 id="por-que-usar-nestjs">¿Por qué usar NestJS?</h3>
+<ul>
+<li><strong>Arquitectura Modular:</strong> Facilita la organización y reutilización de código.</li>
+<li><strong>Soporte para TypeScript:</strong> Proporciona tipado estático, mejorando la calidad del código y la experiencia de desarrollo.</li>
+<li><strong>Integración con TypeORM:</strong> Simplifica la interacción con bases de datos.</li>
+<li><strong>Inyección de Dependencias:</strong> Facilita la gestión de dependencias y la creación de componentes desacoplados.</li>
+<li><strong>Comunidad Activa:</strong> Amplio soporte y constante actualización de herramientas y librerías.</li>
+</ul>
+<h3 id="que-es-typeorm">¿Qué es TypeORM?</h3>
+<p>TypeORM es un ORM (Object-Relational Mapping) que facilita la interacción entre aplicaciones TypeScript y bases de datos SQL. Proporciona una abstracción sobre las operaciones CRUD, permitiendo trabajar con entidades y repositorios en lugar de escribir consultas SQL manualmente.</p>
+<h3 id="caracteristicas-principales">Características Principales</h3>
+<ul>
+<li><strong>Soporte para múltiples bases de datos:</strong> MySQL, PostgreSQL, SQLite, MariaDB, Microsoft SQL Server, Oracle, etc.</li>
+<li><strong>Decoradores para Definir Entidades:</strong> Utiliza decoradores de TypeScript para definir modelos de datos.</li>
+<li><strong>Migraciones:</strong> Facilita la gestión de cambios en el esquema de la base de datos.</li>
+<li><strong>Relaciones entre Entidades:</strong> Soporta relaciones uno a uno, uno a muchos y muchos a muchos.</li>
+<li><strong>Query Builder:</strong> Permite construir consultas complejas de manera programática.</li>
+<li><strong>Active Record y Data Mapper:</strong> Soporta ambos patrones de diseño.</li>
+</ul>
+<h3 id="instalacion-y-configuracion">Instalación y Configuración</h3>
+<p>Para integrar TypeORM con NestJS, es necesario instalar los paquetes correspondientes y configurar la conexión a la base de datos.</p>
+<pre><code class="language-bash">npm install --save @nestjs/typeorm typeorm mysql2
+
+En el archivo `app.module.ts`, se configura el módulo de TypeORM:
+
+```typescript
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'tu_usuario',
+      password: 'tu_contraseña',
+      database: 'nombre_de_la_base_de_datos',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    // Otros módulos
+  ],
+})
+export class AppModule {}
+</code></pre>
+<hr />
+<h3 id="que-es-nestjs-cli">¿Qué es Nest.js CLI?</h3>
+<p>El CLI (Command Line Interface) de NestJS es una herramienta poderosa que simplifica la creación y gestión de proyectos NestJS. Permite generar módulos, controladores, servicios y otros componentes de manera automática, siguiendo las mejores prácticas del framework.</p>
+<h3 id="instalacion-del-cli">Instalación del CLI</h3>
+<p>Para instalar el Nest.js CLI de manera global, ejecuta:</p>
+<pre><code class="language-bash">npm install -g @nestjs/cli
+</code></pre>
+<h3 id="creacion-de-un-nuevo-proyecto">Creación de un Nuevo Proyecto</h3>
+<p>Utiliza el siguiente comando para crear un nuevo proyecto NestJS:</p>
+<pre><code class="language-bash">nest new nombre-del-proyecto
+</code></pre>
+<p>Este comando genera la estructura básica del proyecto, instala las dependencias y configura el entorno de desarrollo.</p>
+<h3 id="comandos-basicos-del-cli">Comandos Básicos del CLI</h3>
+<ul>
+<li><strong>Generar Módulo:</strong></li>
+</ul>
+<p><code>bash
+  nest generate module nombre-modulo</code></p>
+<ul>
+<li><strong>Generar Controlador:</strong></li>
+</ul>
+<p><code>bash
+  nest generate controller nombre-controlador</code></p>
+<ul>
+<li><strong>Generar Servicio:</strong></li>
+</ul>
+<p><code>bash
+  nest generate service nombre-servicio</code></p>
+<ul>
+<li><strong>Generar Recurso:</strong></li>
+</ul>
+<p><code>bash
+  nest generate resource nombre-recurso</code></p>
+<p>Este comando genera un módulo, controlador y servicio para un recurso específico, facilitando la creación de APIs RESTful.</p>
+<hr />
+<h3 id="que-es-docker-compose">¿Qué es Docker Compose?</h3>
+<p>Docker Compose es una herramienta para definir y gestionar aplicaciones multicontenedor de Docker. Permite definir los servicios, redes y volúmenes de la aplicación en un archivo <code>docker-compose.yml</code>, facilitando la orquestación y despliegue de entornos de desarrollo consistentes.</p>
+<h3 id="instalacion-de-docker-y-docker-compose">Instalación de Docker y Docker Compose</h3>
+<ol>
+<li><strong>Instalar Docker Desktop:</strong></li>
+<li>
+<p>Descarga e instala Docker Desktop desde <a href="https://www.docker.com/products/docker-desktop">Docker Hub</a>.</p>
+</li>
+<li>
+<p><strong>Verificar la Instalación:</strong></p>
+</li>
+</ol>
+<p><code>bash
+   docker --version
+   docker-compose --version</code></p>
+<h3 id="configuracion-de-docker-compose-para-mysql">Configuración de Docker Compose para MySQL</h3>
+<p>Crea un archivo <code>docker-compose.yml</code> en la raíz de tu proyecto con la siguiente configuración:</p>
+<pre><code class="language-yaml">version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: nombre_de_la_base_de_datos
+      MYSQL_USER: tu_usuario
+      MYSQL_PASSWORD: tu_contraseña
+      MYSQL_ROOT_PASSWORD: tu_contraseña_root
+    ports:
+      - &quot;3306:3306&quot;
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+</code></pre>
+<h3 id="uso-de-docker-compose">Uso de Docker Compose</h3>
+<ol>
+<li><strong>Iniciar los Servicios:</strong></li>
+</ol>
+<p><code>bash
+   docker-compose up -d</code></p>
+<p>Este comando descarga la imagen de MySQL, crea y ejecuta el contenedor en segundo plano.</p>
+<ol>
+<li><strong>Detener los Servicios:</strong></li>
+</ol>
+<p><code>bash
+   docker-compose down</code></p>
+<ol>
+<li><strong>Verificar los Contenedores en Ejecución:</strong></li>
+</ol>
+<p><code>bash
+   docker ps</code></p>
+<h3 id="ventajas-de-usar-docker-compose">Ventajas de Usar Docker Compose</h3>
+<ul>
+<li><strong>Consistencia en Entornos:</strong> Asegura que todos los desarrolladores trabajen con las mismas configuraciones.</li>
+<li><strong>Facilidad de Uso:</strong> Simplifica el inicio y parada de servicios con comandos sencillos.</li>
+<li><strong>Escalabilidad:</strong> Permite añadir más servicios fácilmente, como servidores de caché, APIs adicionales, etc.</li>
+</ul>
+<hr />
+<h2 id="visualizar-base-de-datos">Visualizar Base de Datos</h2>
+<h3 id="herramienta-recomendada-dbeaver">Herramienta Recomendada: DBeaver</h3>
+<h3 id="instalacion-de-dbeaver">Instalación de DBeaver</h3>
+<ol>
+<li><strong>Descargar DBeaver:</strong></li>
+<li>
+<p>Visita <a href="https://dbeaver.io/download/">https://dbeaver.io/download/</a> y descarga la versión Community para Windows.</p>
+</li>
+<li>
+<p><strong>Ejecutar el Instalador:</strong></p>
+</li>
+<li>
+<p>Sigue las instrucciones del asistente de instalación.</p>
+</li>
+<li>
+<p><strong>Configurar la Conexión a MySQL:</strong></p>
+</li>
+<li>
+<p><strong>Abrir DBeaver:</strong></p>
+<ul>
+<li>Inicia DBeaver desde el menú de inicio o el acceso directo.</li>
+</ul>
+</li>
+<li>
+<p><strong>Crear una Nueva Conexión:</strong></p>
+<ul>
+<li>Haz clic en el botón <strong>"New Database Connection"</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Seleccionar MySQL:</strong></p>
+<ul>
+<li>Elige <strong>MySQL</strong> de la lista de bases de datos y haz clic en <strong>"Next"</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ingresar los Detalles de Conexión:</strong></p>
+<ul>
+<li><strong>Host:</strong> <code>localhost</code></li>
+<li><strong>Port:</strong> <code>3306</code></li>
+<li><strong>Database:</strong> <code>nombre_de_la_base_de_datos</code></li>
+<li><strong>Username:</strong> <code>tu_usuario</code></li>
+<li><strong>Password:</strong> <code>tu_contraseña</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Probar la Conexión:</strong></p>
+<ul>
+<li>Haz clic en <strong>"Test Connection"</strong> para verificar que los detalles son correctos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finalizar la Configuración:</strong></p>
+<ul>
+<li>Si la prueba es exitosa, haz clic en <strong>"Finish"</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Puedes usar el que mas te guste </p>
+<hr />
+<h2 id="cli-resource-cats">CLI Resource Cats</h2>
+<h3 id="creacion-de-recursos-con-nestjs-cli">Creación de Recursos con Nest.js CLI</h3>
+<p>Para estructurar la API de manera eficiente, Nest.js CLI ofrece comandos para generar recursos completos, incluyendo módulos, controladores y servicios.</p>
+<h3 id="generar-un-recurso-cats">Generar un Recurso: Cats</h3>
+<p>Ejecuta el siguiente comando para generar un recurso llamado <code>cats</code>:</p>
+<pre><code class="language-bash">nest generate resource cats
+</code></pre>
+<h3 id="estructura-generada">Estructura Generada</h3>
+<p>Este comando crea:</p>
+<ul>
+<li><strong>Módulo:</strong> <code>cats.module.ts</code></li>
+<li><strong>Controlador:</strong> <code>cats.controller.ts</code></li>
+<li><strong>Servicio:</strong> <code>cats.service.ts</code></li>
+<li><strong>DTOs:</strong> Data Transfer Objects para manejar datos de entrada y salida.</li>
+<li><strong>Interfaces:</strong> Definición de la estructura de los datos.</li>
+</ul>
+<hr />
+<h3 id="introduccion-a-class-validator">Introducción a Class Validator</h3>
+<p><strong>Class Validator</strong> es una biblioteca que permite realizar validaciones en las propiedades de las clases utilizando decoradores. Es especialmente útil para validar datos de entrada en APIs, asegurando que los datos cumplen con ciertos criterios antes de ser procesados.</p>
+<h3 id="instalacion">Instalación</h3>
+<p>Para instalar Class Validator y Class Transformer, ejecuta:</p>
+<pre><code class="language-bash">npm install --save class-validator class-transformer
+</code></pre>
+<h3 id="uso-en-nestjs">Uso en NestJS</h3>
+<ol>
+<li><strong>Crear DTOs con Validaciones:</strong></li>
+</ol>
+<p>Define DTOs (Data Transfer Objects) utilizando decoradores de validación para asegurar que los datos recibidos cumplen con los requisitos.</p>
+<p>```typescript
+   import { IsString, IsInt, Min, Max } from 'class-validator';</p>
+<p>export class CreateCatDto {
+     @IsString()
+     readonly name: string;</p>
+<pre><code> @IsInt()
+ @Min(0)
+ @Max(30)
+ readonly age: number;
+
+ @IsString()
+ readonly breed: string;
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li><strong>Aplicar Validaciones en el Controlador:</strong></li>
+</ol>
+<p>Utiliza el pipe de validación proporcionado por NestJS para aplicar las validaciones definidas en los DTOs.</p>
+<p>```typescript
+   import { Body, Controller, Post } from '@nestjs/common';
+   import { CreateCatDto } from './dto/create-cat.dto';
+   import { CatsService } from './cats.service';</p>
+<p>@Controller('cats')
+   export class CatsController {
+     constructor(private readonly catsService: CatsService) {}</p>
+<pre><code> @Post()
+ async create(@Body() createCatDto: CreateCatDto) {
+   return this.catsService.create(createCatDto);
+ }
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li><strong>Habilitar Validaciones Globales:</strong></li>
+</ol>
+<p>En el archivo <code>main.ts</code>, habilita el pipe de validación global para que todas las solicitudes pasen por las validaciones definidas en los DTOs.</p>
+<p>```typescript
+   import { ValidationPipe } from '@nestjs/common';
+   import { NestFactory } from '@nestjs/core';
+   import { AppModule } from './app.module';</p>
+<p>async function bootstrap() {
+     const app = await NestFactory.create(AppModule);
+     app.useGlobalPipes(new ValidationPipe());
+     await app.listen(3000);
+   }
+   bootstrap();
+   ```</p>
+<h3 id="ventajas-de-usar-class-validator">Ventajas de Usar Class Validator</h3>
+<ul>
+<li><strong>Simplicidad:</strong> Fácil de implementar y utilizar con decoradores.</li>
+<li><strong>Flexibilidad:</strong> Soporta una amplia gama de validaciones personalizables.</li>
+<li><strong>Integración:</strong> Se integra perfectamente con NestJS y su sistema de pipes.</li>
+</ul>
+<hr />
+<h2 id="conexion-a-base-de-datos">Conexión a Base de Datos</h2>
+<h3 id="configuracion-de-la-conexion-con-typeorm">Configuración de la Conexión con TypeORM</h3>
+<p>Para conectar NestJS con MySQL utilizando TypeORM, es necesario configurar los detalles de conexión en el módulo de TypeORM.</p>
+<h3 id="pasos-para-configurar-la-conexion">Pasos para Configurar la Conexión</h3>
+<ol>
+<li><strong>Editar <code>app.module.ts</code>:</strong></li>
+</ol>
+<p>```typescript
+   import { Module } from '@nestjs/common';
+   import { TypeOrmModule } from '@nestjs/typeorm';
+   import { CatsModule } from './cats/cats.module';</p>
+<p>@Module({
+     imports: [
+       TypeOrmModule.forRoot({
+         type: 'mysql',
+         host: 'localhost',
+         port: 3306,
+         username: 'tu_usuario',
+         password: 'tu_contraseña',
+         database: 'nombre_de_la_base_de_datos',
+         entities: [__dirname + '/*<em>/</em>.entity{.ts,.js}'],
+         synchronize: true,
+       }),
+       CatsModule,
+     ],
+     controllers: [],
+     providers: [],
+   })
+   export class AppModule {}
+   ```</p>
+<ul>
+<li><strong>Type:</strong> Tipo de base de datos (<code>mysql</code>).</li>
+<li><strong>Host:</strong> <code>localhost</code> si está ejecutándose localmente.</li>
+<li><strong>Port:</strong> Puerto de conexión (<code>3306</code> para MySQL).</li>
+<li><strong>Username:</strong> Usuario de la base de datos.</li>
+<li><strong>Password:</strong> Contraseña del usuario.</li>
+<li><strong>Database:</strong> Nombre de la base de datos.</li>
+<li><strong>Entities:</strong> Ruta donde se encuentran las entidades.</li>
+<li><strong>Synchronize:</strong> <code>true</code> para sincronizar automáticamente el esquema de la base de datos (solo en desarrollo).</li>
+</ul>
+<h3 id="beneficios-de-la-configuracion">Beneficios de la Configuración</h3>
+<ul>
+<li><strong>Facilidad de Uso:</strong> TypeORM maneja la conexión y las operaciones básicas con la base de datos.</li>
+<li><strong>Automatización:</strong> Las entidades se sincronizan automáticamente con el esquema de la base de datos.</li>
+<li><strong>Flexibilidad:</strong> Permite configurar diferentes opciones según las necesidades del proyecto.</li>
+</ul>
+<hr />
+<h2 id="repository-pattern">Repository Pattern</h2>
+<h3 id="que-es-el-repository-pattern">¿Qué es el Repository Pattern?</h3>
+<p>El <strong>Repository Pattern</strong> es un patrón de diseño que abstrae la lógica de acceso a datos, proporcionando una interfaz limpia para interactuar con la fuente de datos. En el contexto de TypeORM y NestJS, los repositorios gestionan las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para las entidades.</p>
+<h3 id="beneficios-del-repository-pattern">Beneficios del Repository Pattern</h3>
+<ul>
+<li><strong>Desacoplamiento:</strong> Separa la lógica de acceso a datos de la lógica de negocio.</li>
+<li><strong>Mantenibilidad:</strong> Facilita el mantenimiento y la escalabilidad del código.</li>
+<li><strong>Testabilidad:</strong> Permite la creación de pruebas unitarias más fácilmente al mockear los repositorios.</li>
+</ul>
+<h3 id="implementacion-en-nestjs">Implementación en NestJS</h3>
+<ol>
+<li><strong>Inyección del Repositorio:</strong></li>
+</ol>
+<p>En el servicio, inyecta el repositorio correspondiente a la entidad.</p>
+<p>```typescript
+   import { Injectable } from '@nestjs/common';
+   import { InjectRepository } from '@nestjs/typeorm';
+   import { Repository } from 'typeorm';
+   import { Cat } from './entities/cat.entity';
+   import { CreateCatDto } from './dto/create-cat.dto';</p>
+<p>@Injectable()
+   export class CatsService {
+     constructor(
+       @InjectRepository(Cat)
+       private catsRepository: Repository<Cat>,
+     ) {}</p>
+<pre><code> create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
+   const cat = this.catsRepository.create(createCatDto);
+   return this.catsRepository.save(cat);
+ }
+
+ findAll(): Promise&lt;Cat[]&gt; {
+   return this.catsRepository.find();
+ }
+
+ // Otros métodos CRUD
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li><strong>Uso del Repositorio:</strong></li>
+</ol>
+<p>Utiliza los métodos proporcionados por TypeORM para interactuar con la base de datos, como <code>find</code>, <code>findOne</code>, <code>create</code>, <code>save</code>, <code>remove</code>, etc.</p>
+<hr />
+<h2 id="entity">Entity</h2>
+<h3 id="que-es-una-entity-en-typeorm">¿Qué es una Entity en TypeORM?</h3>
+<p>Una <strong>Entity</strong> en TypeORM representa una tabla en la base de datos y cada instancia de la entidad representa una fila en dicha tabla. Las entidades se definen como clases de TypeScript decoradas con decoradores proporcionados por TypeORM.</p>
+<h3 id="definicion-de-una-entity">Definición de una Entity</h3>
+<ol>
+<li><strong>Crear la Clase de la Entity:</strong></li>
+</ol>
+<p>Crea un archivo <code>cat.entity.ts</code> en la carpeta <code>entities</code> dentro del módulo <code>cats</code>.</p>
+<p>```typescript
+   import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';</p>
+<p>@Entity()
+   export class Cat {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ name: string;
+
+ @Column()
+ age: number;
+
+ @Column()
+ breed: string;
+</code></pre>
+<p>}
+   ```</p>
+<ul>
+<li><strong>@Entity():</strong> Marca la clase como una entidad que TypeORM gestionará.</li>
+<li><strong>@PrimaryGeneratedColumn():</strong> Define la columna <code>id</code> como una clave primaria auto-generada.</li>
+<li><strong>@Column():</strong> Define las columnas de la entidad.</li>
+</ul>
+<h3 id="tipos-de-columnas">Tipos de Columnas</h3>
+<ul>
+<li><strong>Tipos Básicos:</strong></li>
+<li>
+<p><code>string</code>, <code>number</code>, <code>boolean</code>, <code>Date</code>, etc.</p>
+</li>
+<li>
+<p><strong>Tipos Avanzados:</strong></p>
+</li>
+<li><code>enum</code>, <code>array</code>, <code>json</code>, etc.</li>
+</ul>
+<h3 id="relaciones-entre-entities">Relaciones entre Entities</h3>
+<p>TypeORM permite definir relaciones entre entidades, como uno a uno, uno a muchos y muchos a muchos.</p>
+<pre><code class="language-typescript">import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Photo } from './photo.entity';
+
+@Entity()
+export class Cat {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
+
+  @OneToMany(() =&gt; Photo, (photo) =&gt; photo.cat)
+  photos: Photo[];
+}
+</code></pre>
+<h3 id="ventajas-de-utilizar-entities">Ventajas de Utilizar Entities</h3>
+<ul>
+<li><strong>Mapeo Directo a la Base de Datos:</strong> Facilita la sincronización entre el modelo de datos de la aplicación y la base de datos.</li>
+<li><strong>Organización:</strong> Mantiene el código limpio y organizado al separar las definiciones de las entidades.</li>
+<li><strong>Flexibilidad:</strong> Permite definir relaciones y tipos de columnas complejos.</li>
+</ul>
+<hr />
+<h2 id="utilizando-repository-pattern">Utilizando Repository Pattern</h2>
+<h3 id="integracion-del-repository-pattern-en-el-servicio">Integración del Repository Pattern en el Servicio</h3>
+<p>Una vez definidas las entidades y configurado el repositorio, se pueden implementar métodos en el servicio para manejar las operaciones CRUD utilizando el Repository Pattern.</p>
+<h3 id="ejemplos-de-metodos-en-el-servicio">Ejemplos de Métodos en el Servicio</h3>
+<ol>
+<li><strong>Crear un Nuevo Cat:</strong></li>
+</ol>
+<p><code>typescript
+   async create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
+     const cat = this.catsRepository.create(createCatDto);
+     return this.catsRepository.save(cat);
+   }</code></p>
+<ul>
+<li><strong>create:</strong> Crea una nueva instancia de la entidad <code>Cat</code> con los datos proporcionados.</li>
+<li>
+<p><strong>save:</strong> Persiste la entidad en la base de datos.</p>
+</li>
+<li>
+<p><strong>Obtener Todos los Cats:</strong></p>
+</li>
+</ul>
+<p><code>typescript
+   findAll(): Promise&lt;Cat[]&gt; {
+     return this.catsRepository.find();
+   }</code></p>
+<ul>
+<li>
+<p><strong>find:</strong> Recupera todas las entidades <code>Cat</code> de la base de datos.</p>
+</li>
+<li>
+<p><strong>Obtener un Cat por ID:</strong></p>
+</li>
+</ul>
+<p><code>typescript
+   findOne(id: number): Promise&lt;Cat&gt; {
+     return this.catsRepository.findOneBy({ id });
+   }</code></p>
+<ul>
+<li>
+<p><strong>findOneBy:</strong> Busca una entidad <code>Cat</code> específica por su <code>id</code>.</p>
+</li>
+<li>
+<p><strong>Actualizar un Cat:</strong></p>
+</li>
+</ul>
+<p><code>typescript
+   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
+     await this.catsRepository.update(id, updateCatDto);
+     return this.catsRepository.findOneBy({ id });
+   }</code></p>
+<ul>
+<li><strong>update:</strong> Actualiza los datos de una entidad <code>Cat</code> existente.</li>
+<li>
+<p><strong>findOneBy:</strong> Recupera la entidad actualizada.</p>
+</li>
+<li>
+<p><strong>Eliminar un Cat:</strong></p>
+</li>
+</ul>
+<p><code>typescript
+   async remove(id: number): Promise&lt;void&gt; {
+     await this.catsRepository.delete(id);
+   }</code></p>
+<ul>
+<li><strong>delete:</strong> Elimina una entidad <code>Cat</code> de la base de datos.</li>
+</ul>
+<h3 id="beneficios-de-utilizar-repository-pattern">Beneficios de Utilizar Repository Pattern</h3>
+<ul>
+<li><strong>Abstracción:</strong> Oculta la complejidad de las operaciones de base de datos.</li>
+<li><strong>Reutilización de Código:</strong> Permite reutilizar métodos y lógica de acceso a datos.</li>
+<li><strong>Facilidad de Pruebas:</strong> Simplifica la creación de pruebas unitarias al permitir mockear repositorios.</li>
+</ul>
+<hr />
+<h2 id="create-cat-dto">Create Cat DTO</h2>
+<h3 id="que-es-un-dto">¿Qué es un DTO?</h3>
+<p><strong>DTO (Data Transfer Object)</strong> es un patrón de diseño que se utiliza para transferir datos entre diferentes capas de una aplicación. En NestJS, los DTOs se utilizan para definir la estructura de los datos que se envían y reciben a través de la API, asegurando que los datos cumplen con los requisitos antes de ser procesados.</p>
+<h3 id="creacion-de-un-createcatdto">Creación de un CreateCatDto</h3>
+<ol>
+<li><strong>Definir el DTO:</strong></li>
+</ol>
+<p>Crea un archivo <code>create-cat.dto.ts</code> en la carpeta <code>dto</code> dentro del módulo <code>cats</code>.</p>
+<p>```typescript
+   import { IsString, IsInt, Min, Max } from 'class-validator';</p>
+<p>export class CreateCatDto {
+     @IsString()
+     readonly name: string;</p>
+<pre><code> @IsInt()
+ @Min(0)
+ @Max(30)
+ readonly age: number;
+
+ @IsString()
+ readonly breed: string;
+</code></pre>
+<p>}
+   ```</p>
+<ul>
+<li>
+<p><strong>Decoradores de Validación:</strong></p>
+<ul>
+<li><code>@IsString()</code>: Asegura que el valor es una cadena de texto.</li>
+<li><code>@IsInt()</code>: Asegura que el valor es un número entero.</li>
+<li><code>@Min()</code>, <code>@Max()</code>: Define los límites mínimo y máximo para el valor.</li>
+</ul>
+</li>
+<li>
+<p><strong>Uso del DTO en el Controlador:</strong></p>
+</li>
+</ul>
+<p>Aplica el DTO en el método <code>create</code> del controlador para validar los datos de entrada.</p>
+<p>```typescript
+   import { Body, Controller, Post } from '@nestjs/common';
+   import { CreateCatDto } from './dto/create-cat.dto';
+   import { CatsService } from './cats.service';</p>
+<p>@Controller('cats')
+   export class CatsController {
+     constructor(private readonly catsService: CatsService) {}</p>
+<pre><code> @Post()
+ async create(@Body() createCatDto: CreateCatDto) {
+   return this.catsService.create(createCatDto);
+ }
+</code></pre>
+<p>}
+   ```</p>
+<h3 id="ventajas-de-usar-dtos">Ventajas de Usar DTOs</h3>
+<ul>
+<li><strong>Validación de Datos:</strong> Asegura que los datos recibidos cumplen con los requisitos antes de ser procesados.</li>
+<li><strong>Seguridad:</strong> Previene la inyección de datos maliciosos al controlar la estructura y tipos de los datos.</li>
+<li><strong>Claridad:</strong> Define claramente qué datos se esperan en cada operación, mejorando la mantenibilidad del código.</li>
+</ul>
+<hr />
+<h2 id="soft-delete">Soft Delete</h2>
+<h3 id="que-es-soft-delete">¿Qué es Soft Delete?</h3>
+<p><strong>Soft Delete</strong> es una técnica para eliminar registros de una base de datos sin borrarlos físicamente. En lugar de eliminar el registro, se marca como eliminado mediante un campo adicional, lo que permite restaurarlo en el futuro si es necesario.</p>
+<h3 id="implementacion-de-soft-delete-con-typeorm">Implementación de Soft Delete con TypeORM</h3>
+<ol>
+<li><strong>Añadir una Columna de Eliminación Suave:</strong></li>
+</ol>
+<p>En la entidad <code>Cat</code>, añade un campo <code>deletedAt</code> que almacenará la fecha de eliminación.</p>
+<p>```typescript
+   import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';</p>
+<p>@Entity()
+   export class Cat {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ name: string;
+
+ @Column()
+ age: number;
+
+ @Column()
+ breed: string;
+
+ @DeleteDateColumn()
+ deletedAt?: Date;
+</code></pre>
+<p>}
+   ```</p>
+<ul>
+<li>
+<p><strong>@DeleteDateColumn():</strong> Marca la columna para almacenar la fecha de eliminación suave.</p>
+</li>
+<li>
+<p><strong>Configuración del Repositorio:</strong></p>
+</li>
+</ul>
+<p>TypeORM maneja automáticamente las eliminaciones suaves si se usa el método <code>softDelete</code>.</p>
+<p><code>typescript
+   async remove(id: number): Promise&lt;void&gt; {
+     await this.catsRepository.softDelete(id);
+   }</code></p>
+<ol>
+<li><strong>Recuperar Registros Eliminados Suavemente:</strong></li>
+</ol>
+<p>Utiliza el método <code>restore</code> para recuperar un registro eliminado.</p>
+<p><code>typescript
+   async restore(id: number): Promise&lt;void&gt; {
+     await this.catsRepository.restore(id);
+   }</code></p>
+<ol>
+<li><strong>Filtrar Registros Eliminados:</strong></li>
+</ol>
+<p>Por defecto, TypeORM excluye los registros eliminados suavemente en las consultas. Para incluirlos, se puede usar el parámetro <code>withDeleted</code>.</p>
+<p><code>typescript
+   findAll(): Promise&lt;Cat[]&gt; {
+     return this.catsRepository.find({ withDeleted: true });
+   }</code></p>
+<h3 id="ventajas-de-soft-delete">Ventajas de Soft Delete</h3>
+<ul>
+<li><strong>Recuperación de Datos:</strong> Permite restaurar registros eliminados por error.</li>
+<li><strong>Auditoría:</strong> Mantiene un historial de registros eliminados.</li>
+<li><strong>Integridad Referencial:</strong> Evita problemas en relaciones de tablas al no eliminar registros físicamente.</li>
+</ul>
+<h3 id="consideraciones">Consideraciones</h3>
+<ul>
+<li><strong>Rendimiento:</strong> Puede afectar el rendimiento si se manejan grandes volúmenes de datos con muchos registros eliminados.</li>
+<li><strong>Mantenimiento:</strong> Requiere limpieza periódica de registros eliminados para mantener la base de datos optimizada.</li>
+</ul>
+<hr />
+<h2 id="update">Update</h2>
+<h3 id="implementacion-de-la-funcionalidad-de-actualizacion">Implementación de la Funcionalidad de Actualización</h3>
+<p>Actualizar registros en una API RESTful es una operación fundamental. En NestJS, esto se logra mediante la combinación de DTOs, validaciones y el uso del Repository Pattern.</p>
+<h3 id="pasos-para-implementar-la-actualizacion">Pasos para Implementar la Actualización</h3>
+<ol>
+<li><strong>Crear el DTO de Actualización:</strong></li>
+</ol>
+<p>Define un DTO que permita actualizar campos específicos de la entidad <code>Cat</code>.</p>
+<p>```typescript
+   import { PartialType } from '@nestjs/mapped-types';
+   import { CreateCatDto } from './create-cat.dto';</p>
+<p>export class UpdateCatDto extends PartialType(CreateCatDto) {}
+   ```</p>
+<ul>
+<li>
+<p><strong>PartialType:</strong> Permite que todos los campos del DTO original sean opcionales, facilitando actualizaciones parciales.</p>
+</li>
+<li>
+<p><strong>Actualizar el Controlador:</strong></p>
+</li>
+</ul>
+<p>Añade un método <code>update</code> en el controlador para manejar las solicitudes de actualización.</p>
+<p>```typescript
+   import { Body, Controller, Param, Patch } from '@nestjs/common';
+   import { UpdateCatDto } from './dto/update-cat.dto';
+   import { CatsService } from './cats.service';</p>
+<p>@Controller('cats')
+   export class CatsController {
+     constructor(private readonly catsService: CatsService) {}</p>
+<pre><code> @Patch(':id')
+ async update(@Param('id') id: number, @Body() updateCatDto: UpdateCatDto) {
+   return this.catsService.update(id, updateCatDto);
+ }
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li><strong>Actualizar el Servicio:</strong></li>
+</ol>
+<p>Implementa el método <code>update</code> en el servicio, utilizando el repositorio para actualizar el registro.</p>
+<p><code>typescript
+   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
+     await this.catsRepository.update(id, updateCatDto);
+     return this.catsRepository.findOneBy({ id });
+   }</code></p>
+<h3 id="consideraciones-para-la-actualizacion">Consideraciones para la Actualización</h3>
+<ul>
+<li><strong>Validación de Datos:</strong> Asegura que los datos de entrada cumplen con los requisitos antes de actualizar.</li>
+<li><strong>Manejo de Errores:</strong> Gestiona adecuadamente los casos donde el registro a actualizar no existe.</li>
+<li><strong>Actualizaciones Parciales:</strong> Permite actualizar solo los campos necesarios sin afectar otros datos.</li>
+</ul>
+<hr />
+<h2 id="relaciones-sql">Relaciones SQL</h2>
+<h3 id="introduccion-a-las-relaciones-en-sql">Introducción a las Relaciones en SQL</h3>
+<p>Las relaciones en bases de datos permiten asociar tablas entre sí, estableciendo cómo los datos en una tabla se relacionan con los datos en otra. Las relaciones principales son:</p>
+<ul>
+<li><strong>Uno a Uno (One-to-One):</strong> Un registro en una tabla está asociado a un único registro en otra tabla.</li>
+<li><strong>Uno a Muchos (One-to-Many):</strong> Un registro en una tabla está asociado a múltiples registros en otra tabla.</li>
+<li><strong>Muchos a Muchos (Many-to-Many):</strong> Múltiples registros en una tabla están asociados a múltiples registros en otra tabla.</li>
+</ul>
+<h3 id="implementacion-de-relaciones-con-typeorm">Implementación de Relaciones con TypeORM</h3>
+<h4 id="relaciones-uno-a-muchos">Relaciones Uno a Muchos</h4>
+<p>Ejemplo: Un <code>Cat</code> puede tener muchas <code>Photo</code>.</p>
+<ol>
+<li><strong>Definir las Entidades:</strong></li>
+</ol>
+<p>```typescript
+   // cat.entity.ts
+   import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+   import { Photo } from './photo.entity';</p>
+<p>@Entity()
+   export class Cat {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ name: string;
+
+ @OneToMany(() =&gt; Photo, (photo) =&gt; photo.cat)
+ photos: Photo[];
+</code></pre>
+<p>}
+   ```</p>
+<p>```typescript
+   // photo.entity.ts
+   import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+   import { Cat } from './cat.entity';</p>
+<p>@Entity()
+   export class Photo {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ url: string;
+
+ @ManyToOne(() =&gt; Cat, (cat) =&gt; cat.photos)
+ cat: Cat;
+</code></pre>
+<p>}
+   ```</p>
+<ol>
+<li>
+<p><strong>Gestión de las Relaciones:</strong></p>
+</li>
+<li>
+<p><strong>Creación de Photos asociadas a un Cat:</strong></p>
+<ul>
+<li>Al crear una <code>Photo</code>, se debe asociar al <code>Cat</code> correspondiente.</li>
+</ul>
+</li>
+<li><strong>Cascada de Operaciones:</strong><ul>
+<li>Configurar <code>cascade: true</code> si se desea que las operaciones en el <code>Cat</code> afecten automáticamente a las <code>Photos</code>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="relaciones-muchos-a-muchos">Relaciones Muchos a Muchos</h4>
+<p>Ejemplo: Un <code>Cat</code> puede tener múltiples <code>Toys</code> y un <code>Toy</code> puede pertenecer a múltiples <code>Cats</code>.</p>
+<ol>
+<li><strong>Definir las Entidades:</strong></li>
+</ol>
+<p>```typescript
+   // cat.entity.ts
+   import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+   import { Toy } from './toy.entity';</p>
+<p>@Entity()
+   export class Cat {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ name: string;
+
+ @ManyToMany(() =&gt; Toy, (toy) =&gt; toy.cats)
+ @JoinTable()
+ toys: Toy[];
+</code></pre>
+<p>}
+   ```</p>
+<p>```typescript
+   // toy.entity.ts
+   import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+   import { Cat } from './cat.entity';</p>
+<p>@Entity()
+   export class Toy {
+     @PrimaryGeneratedColumn()
+     id: number;</p>
+<pre><code> @Column()
+ name: string;
+
+ @ManyToMany(() =&gt; Cat, (cat) =&gt; cat.toys)
+ cats: Cat[];
+</code></pre>
+<p>}
+   ```</p>
+<h3 id="ventajas-de-utilizar-relaciones-en-sql">Ventajas de Utilizar Relaciones en SQL</h3>
+<ul>
+<li><strong>Normalización de Datos:</strong> Evita la redundancia y asegura la integridad de los datos.</li>
+<li><strong>Eficiencia en Consultas:</strong> Facilita la ejecución de consultas complejas y el filtrado de datos.</li>
+<li><strong>Flexibilidad:</strong> Permite modelar relaciones complejas entre diferentes entidades.</li>
+</ul>
+<h3 id="consideraciones-al-implementar-relaciones">Consideraciones al Implementar Relaciones</h3>
+<ul>
+<li><strong>Integridad Referencial:</strong> Asegura que las relaciones entre tablas sean consistentes.</li>
+<li><strong>Optimización de Consultas:</strong> Utiliza índices y optimiza las consultas para mejorar el rendimiento.</li>
+<li><strong>Manejo de Relaciones en el Código:</strong> Gestiona adecuadamente las relaciones en el servicio y controlador para evitar errores y garantizar la consistencia de los datos.</li>
+</ul>
+<hr />
+<h2 id="resumen">Resumen</h2>
+<h3 id="recapitulacion-de-los-conceptos-clave">Recapitulación de los Conceptos Clave</h3>
+<p>Durante esta primera semana, hemos abordado los fundamentos esenciales para construir una API RESTful utilizando NestJS, MySQL, TypeORM y TypeScript. A continuación, se resumen los puntos más importantes:</p>
+<ol>
+<li><strong>Introducción a NestJS y su Ecosistema:</strong></li>
+<li>Comprendimos qué es NestJS y por qué es una excelente elección para el desarrollo de aplicaciones backend.</li>
+<li>
+<p>Exploramos las ventajas de utilizar TypeScript junto con NestJS.</p>
+</li>
+<li>
+<p><strong>TypeORM:</strong></p>
+</li>
+<li>Aprendimos qué es un ORM y cómo TypeORM facilita la interacción con bases de datos SQL.</li>
+<li>
+<p>Configuramos la conexión a MySQL y definimos entidades para mapear las tablas de la base de datos.</p>
+</li>
+<li>
+<p><strong>Nest.js CLI:</strong></p>
+</li>
+<li>Instalamos y utilizamos el CLI de NestJS para generar módulos, controladores y servicios de manera eficiente.</li>
+<li>
+<p>Creamos el recurso <code>cats</code> utilizando el CLI, estableciendo una estructura coherente para la API.</p>
+</li>
+<li>
+<p><strong>Docker Compose:</strong></p>
+</li>
+<li>Configuramos Docker Compose para gestionar contenedores de MySQL, asegurando un entorno de desarrollo consistente.</li>
+<li>
+<p>Iniciamos y gestionamos los servicios de Docker para mantener la base de datos en funcionamiento.</p>
+</li>
+<li>
+<p><strong>Visualización de la Base de Datos:</strong></p>
+</li>
+<li>Instalamos y configuramos DBeaver para visualizar y gestionar la base de datos MySQL.</li>
+<li>
+<p>Exploramos las tablas, ejecutamos consultas y generamos diagramas ER para entender las relaciones entre entidades.</p>
+</li>
+<li>
+<p><strong>Repository Pattern y Entities:</strong></p>
+</li>
+<li>Implementamos el Repository Pattern para abstraer la lógica de acceso a datos, mejorando la mantenibilidad y testabilidad del código.</li>
+<li>
+<p>Definimos entidades que representan las tablas de la base de datos, estableciendo relaciones entre ellas.</p>
+</li>
+<li>
+<p><strong>Class Validator y DTOs:</strong></p>
+</li>
+<li>Utilizamos Class Validator para asegurar que los datos de entrada cumplen con los requisitos establecidos.</li>
+<li>
+<p>Creamos DTOs para definir la estructura de los datos que se transfieren a través de la API, mejorando la seguridad y consistencia.</p>
+</li>
+<li>
+<p><strong>CRUD Operations:</strong></p>
+</li>
+<li>Implementamos las operaciones CRUD básicas (Crear, Leer, Actualizar, Eliminar) utilizando los servicios y controladores generados.</li>
+<li>
+<p>Aplicamos el Repository Pattern para manejar las operaciones de manera eficiente.</p>
+</li>
+<li>
+<p><strong>Soft Delete:</strong></p>
+</li>
+<li>Implementamos la funcionalidad de Soft Delete para eliminar registros de manera lógica, permitiendo su recuperación en el futuro.</li>
+<li>
+<p>Gestionamos las eliminaciones y restauraciones de registros utilizando TypeORM.</p>
+</li>
+<li>
+<p><strong>Relaciones SQL:</strong></p>
+<ul>
+<li>Establecimos relaciones entre entidades, como uno a muchos y muchos a muchos, para modelar asociaciones complejas en la base de datos.</li>
+<li>Configuramos las entidades y repositorios para manejar estas relaciones de manera coherente.</li>
+</ul>
+</li>
+</ol>
+<h3 id="recursos-adicionales">Recursos Adicionales</h3>
+<ul>
+<li><a href="https://docs.nestjs.com/">Documentación Oficial de NestJS</a></li>
+<li><a href="https://typeorm.io/">Documentación Oficial de TypeORM</a></li>
+<li><a href="https://docs.docker.com/compose/">Guía de Docker Compose</a></li>
+<li><a href="https://dbeaver.io/">DBeaver - Herramienta de Administración de Bases de Datos</a></li>
+<li><a href="https://github.com/typestack/class-validator">Class Validator</a></li>
+<li><a href="https://fonts.google.com/">Google Fonts</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
