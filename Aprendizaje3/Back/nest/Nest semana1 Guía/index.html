@@ -2398,35 +2398,35 @@ volumes:
 <li><strong>Aplicar Validaciones en el Controlador:</strong></li>
 </ol>
 <p>Utiliza el pipe de validación proporcionado por NestJS para aplicar las validaciones definidas en los DTOs.</p>
-<p>```typescript
-   import { Body, Controller, Post } from '@nestjs/common';
+<pre><code class="language-typescript">   import { Body, Controller, Post } from '@nestjs/common';
    import { CreateCatDto } from './dto/create-cat.dto';
-   import { CatsService } from './cats.service';</p>
-<p>@Controller('cats')
+   import { CatsService } from './cats.service';
+
+   @Controller('cats')
    export class CatsController {
-     constructor(private readonly catsService: CatsService) {}</p>
-<pre><code> @Post()
- async create(@Body() createCatDto: CreateCatDto) {
-   return this.catsService.create(createCatDto);
- }
+     constructor(private readonly catsService: CatsService) {}
+
+     @Post()
+     async create(@Body() createCatDto: CreateCatDto) {
+       return this.catsService.create(createCatDto);
+     }
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ol>
 <li><strong>Habilitar Validaciones Globales:</strong></li>
 </ol>
 <p>En el archivo <code>main.ts</code>, habilita el pipe de validación global para que todas las solicitudes pasen por las validaciones definidas en los DTOs.</p>
-<p>```typescript
-   import { ValidationPipe } from '@nestjs/common';
+<pre><code class="language-typescript">   import { ValidationPipe } from '@nestjs/common';
    import { NestFactory } from '@nestjs/core';
-   import { AppModule } from './app.module';</p>
-<p>async function bootstrap() {
+   import { AppModule } from './app.module';
+
+   async function bootstrap() {
      const app = await NestFactory.create(AppModule);
      app.useGlobalPipes(new ValidationPipe());
      await app.listen(3000);
    }
    bootstrap();
-   ```</p>
+</code></pre>
 <h3 id="ventajas-de-usar-class-validator">Ventajas de Usar Class Validator</h3>
 <ul>
 <li><strong>Simplicidad:</strong> Fácil de implementar y utilizar con decoradores.</li>
@@ -2441,11 +2441,11 @@ volumes:
 <ol>
 <li><strong>Editar <code>app.module.ts</code>:</strong></li>
 </ol>
-<p>```typescript
-   import { Module } from '@nestjs/common';
+<pre><code class="language-typescript">   import { Module } from '@nestjs/common';
    import { TypeOrmModule } from '@nestjs/typeorm';
-   import { CatsModule } from './cats/cats.module';</p>
-<p>@Module({
+   import { CatsModule } from './cats/cats.module';
+
+   @Module({
      imports: [
        TypeOrmModule.forRoot({
          type: 'mysql',
@@ -2454,7 +2454,7 @@ volumes:
          username: 'tu_usuario',
          password: 'tu_contraseña',
          database: 'nombre_de_la_base_de_datos',
-         entities: [__dirname + '/*<em>/</em>.entity{.ts,.js}'],
+         entities: [__dirname + '/**/*.entity{.ts,.js}'],
          synchronize: true,
        }),
        CatsModule,
@@ -2463,7 +2463,7 @@ volumes:
      providers: [],
    })
    export class AppModule {}
-   ```</p>
+</code></pre>
 <ul>
 <li><strong>Type:</strong> Tipo de base de datos (<code>mysql</code>).</li>
 <li><strong>Host:</strong> <code>localhost</code> si está ejecutándose localmente.</li>
@@ -2495,31 +2495,31 @@ volumes:
 <li><strong>Inyección del Repositorio:</strong></li>
 </ol>
 <p>En el servicio, inyecta el repositorio correspondiente a la entidad.</p>
-<p>```typescript
-   import { Injectable } from '@nestjs/common';
+<pre><code class="language-typescript">   import { Injectable } from '@nestjs/common';
    import { InjectRepository } from '@nestjs/typeorm';
    import { Repository } from 'typeorm';
    import { Cat } from './entities/cat.entity';
-   import { CreateCatDto } from './dto/create-cat.dto';</p>
-<p>@Injectable()
+   import { CreateCatDto } from './dto/create-cat.dto';
+
+   @Injectable()
    export class CatsService {
      constructor(
        @InjectRepository(Cat)
-       private catsRepository: Repository<Cat>,
-     ) {}</p>
-<pre><code> create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
-   const cat = this.catsRepository.create(createCatDto);
-   return this.catsRepository.save(cat);
- }
+       private catsRepository: Repository&lt;Cat&gt;,
+     ) {}
 
- findAll(): Promise&lt;Cat[]&gt; {
-   return this.catsRepository.find();
- }
+     create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
+       const cat = this.catsRepository.create(createCatDto);
+       return this.catsRepository.save(cat);
+     }
 
- // Otros métodos CRUD
+     findAll(): Promise&lt;Cat[]&gt; {
+       return this.catsRepository.find();
+     }
+
+     // Otros métodos CRUD
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ol>
 <li><strong>Uso del Repositorio:</strong></li>
 </ol>
@@ -2533,23 +2533,23 @@ volumes:
 <li><strong>Crear la Clase de la Entity:</strong></li>
 </ol>
 <p>Crea un archivo <code>cat.entity.ts</code> en la carpeta <code>entities</code> dentro del módulo <code>cats</code>.</p>
-<p>```typescript
-   import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';</p>
-<p>@Entity()
+<pre><code class="language-typescript">   import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+   @Entity()
    export class Cat {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- name: string;
+     id: number;
 
- @Column()
- age: number;
+     @Column()
+     name: string;
 
- @Column()
- breed: string;
+     @Column()
+     age: number;
+
+     @Column()
+     breed: string;
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ul>
 <li><strong>@Entity():</strong> Marca la clase como una entidad que TypeORM gestionará.</li>
 <li><strong>@PrimaryGeneratedColumn():</strong> Define la columna <code>id</code> como una clave primaria auto-generada.</li>
@@ -2597,11 +2597,11 @@ export class Cat {
 <ol>
 <li><strong>Crear un Nuevo Cat:</strong></li>
 </ol>
-<p><code>typescript
-   async create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
+<pre><code class="language-typescript">   async create(createCatDto: CreateCatDto): Promise&lt;Cat&gt; {
      const cat = this.catsRepository.create(createCatDto);
      return this.catsRepository.save(cat);
-   }</code></p>
+   }
+</code></pre>
 <ul>
 <li><strong>create:</strong> Crea una nueva instancia de la entidad <code>Cat</code> con los datos proporcionados.</li>
 <li>
@@ -2611,10 +2611,10 @@ export class Cat {
 <p><strong>Obtener Todos los Cats:</strong></p>
 </li>
 </ul>
-<p><code>typescript
-   findAll(): Promise&lt;Cat[]&gt; {
+<pre><code class="language-typescript">   findAll(): Promise&lt;Cat[]&gt; {
      return this.catsRepository.find();
-   }</code></p>
+   }
+</code></pre>
 <ul>
 <li>
 <p><strong>find:</strong> Recupera todas las entidades <code>Cat</code> de la base de datos.</p>
@@ -2623,10 +2623,10 @@ export class Cat {
 <p><strong>Obtener un Cat por ID:</strong></p>
 </li>
 </ul>
-<p><code>typescript
-   findOne(id: number): Promise&lt;Cat&gt; {
+<pre><code class="language-typescript">   findOne(id: number): Promise&lt;Cat&gt; {
      return this.catsRepository.findOneBy({ id });
-   }</code></p>
+   }
+</code></pre>
 <ul>
 <li>
 <p><strong>findOneBy:</strong> Busca una entidad <code>Cat</code> específica por su <code>id</code>.</p>
@@ -2635,11 +2635,11 @@ export class Cat {
 <p><strong>Actualizar un Cat:</strong></p>
 </li>
 </ul>
-<p><code>typescript
-   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
+<pre><code class="language-typescript">   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
      await this.catsRepository.update(id, updateCatDto);
      return this.catsRepository.findOneBy({ id });
-   }</code></p>
+   }
+</code></pre>
 <ul>
 <li><strong>update:</strong> Actualiza los datos de una entidad <code>Cat</code> existente.</li>
 <li>
@@ -2649,10 +2649,10 @@ export class Cat {
 <p><strong>Eliminar un Cat:</strong></p>
 </li>
 </ul>
-<p><code>typescript
-   async remove(id: number): Promise&lt;void&gt; {
+<pre><code class="language-typescript">   async remove(id: number): Promise&lt;void&gt; {
      await this.catsRepository.delete(id);
-   }</code></p>
+   }
+</code></pre>
 <ul>
 <li><strong>delete:</strong> Elimina una entidad <code>Cat</code> de la base de datos.</li>
 </ul>
@@ -2671,21 +2671,21 @@ export class Cat {
 <li><strong>Definir el DTO:</strong></li>
 </ol>
 <p>Crea un archivo <code>create-cat.dto.ts</code> en la carpeta <code>dto</code> dentro del módulo <code>cats</code>.</p>
-<p>```typescript
-   import { IsString, IsInt, Min, Max } from 'class-validator';</p>
-<p>export class CreateCatDto {
-     @IsString()
-     readonly name: string;</p>
-<pre><code> @IsInt()
- @Min(0)
- @Max(30)
- readonly age: number;
+<pre><code class="language-typescript">   import { IsString, IsInt, Min, Max } from 'class-validator';
 
- @IsString()
- readonly breed: string;
+   export class CreateCatDto {
+     @IsString()
+     readonly name: string;
+
+     @IsInt()
+     @Min(0)
+     @Max(30)
+     readonly age: number;
+
+     @IsString()
+     readonly breed: string;
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ul>
 <li>
 <p><strong>Decoradores de Validación:</strong></p>
@@ -2700,20 +2700,20 @@ export class Cat {
 </li>
 </ul>
 <p>Aplica el DTO en el método <code>create</code> del controlador para validar los datos de entrada.</p>
-<p>```typescript
-   import { Body, Controller, Post } from '@nestjs/common';
+<pre><code class="language-typescript">   import { Body, Controller, Post } from '@nestjs/common';
    import { CreateCatDto } from './dto/create-cat.dto';
-   import { CatsService } from './cats.service';</p>
-<p>@Controller('cats')
+   import { CatsService } from './cats.service';
+
+   @Controller('cats')
    export class CatsController {
-     constructor(private readonly catsService: CatsService) {}</p>
-<pre><code> @Post()
- async create(@Body() createCatDto: CreateCatDto) {
-   return this.catsService.create(createCatDto);
- }
+     constructor(private readonly catsService: CatsService) {}
+
+     @Post()
+     async create(@Body() createCatDto: CreateCatDto) {
+       return this.catsService.create(createCatDto);
+     }
+   }
 </code></pre>
-<p>}
-   ```</p>
 <h3 id="ventajas-de-usar-dtos">Ventajas de Usar DTOs</h3>
 <ul>
 <li><strong>Validación de Datos:</strong> Asegura que los datos recibidos cumplen con los requisitos antes de ser procesados.</li>
@@ -2729,26 +2729,26 @@ export class Cat {
 <li><strong>Añadir una Columna de Eliminación Suave:</strong></li>
 </ol>
 <p>En la entidad <code>Cat</code>, añade un campo <code>deletedAt</code> que almacenará la fecha de eliminación.</p>
-<p>```typescript
-   import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';</p>
-<p>@Entity()
+<pre><code class="language-typescript">   import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
+
+   @Entity()
    export class Cat {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- name: string;
+     id: number;
 
- @Column()
- age: number;
+     @Column()
+     name: string;
 
- @Column()
- breed: string;
+     @Column()
+     age: number;
 
- @DeleteDateColumn()
- deletedAt?: Date;
+     @Column()
+     breed: string;
+
+     @DeleteDateColumn()
+     deletedAt?: Date;
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ul>
 <li>
 <p><strong>@DeleteDateColumn():</strong> Marca la columna para almacenar la fecha de eliminación suave.</p>
@@ -2758,26 +2758,26 @@ export class Cat {
 </li>
 </ul>
 <p>TypeORM maneja automáticamente las eliminaciones suaves si se usa el método <code>softDelete</code>.</p>
-<p><code>typescript
-   async remove(id: number): Promise&lt;void&gt; {
+<pre><code class="language-typescript">   async remove(id: number): Promise&lt;void&gt; {
      await this.catsRepository.softDelete(id);
-   }</code></p>
+   }
+</code></pre>
 <ol>
 <li><strong>Recuperar Registros Eliminados Suavemente:</strong></li>
 </ol>
 <p>Utiliza el método <code>restore</code> para recuperar un registro eliminado.</p>
-<p><code>typescript
-   async restore(id: number): Promise&lt;void&gt; {
+<pre><code class="language-typescript">   async restore(id: number): Promise&lt;void&gt; {
      await this.catsRepository.restore(id);
-   }</code></p>
+   }
+</code></pre>
 <ol>
 <li><strong>Filtrar Registros Eliminados:</strong></li>
 </ol>
 <p>Por defecto, TypeORM excluye los registros eliminados suavemente en las consultas. Para incluirlos, se puede usar el parámetro <code>withDeleted</code>.</p>
-<p><code>typescript
-   findAll(): Promise&lt;Cat[]&gt; {
+<pre><code class="language-typescript">   findAll(): Promise&lt;Cat[]&gt; {
      return this.catsRepository.find({ withDeleted: true });
-   }</code></p>
+   }
+</code></pre>
 <h3 id="ventajas-de-soft-delete">Ventajas de Soft Delete</h3>
 <ul>
 <li><strong>Recuperación de Datos:</strong> Permite restaurar registros eliminados por error.</li>
@@ -2798,11 +2798,11 @@ export class Cat {
 <li><strong>Crear el DTO de Actualización:</strong></li>
 </ol>
 <p>Define un DTO que permita actualizar campos específicos de la entidad <code>Cat</code>.</p>
-<p>```typescript
-   import { PartialType } from '@nestjs/mapped-types';
-   import { CreateCatDto } from './create-cat.dto';</p>
-<p>export class UpdateCatDto extends PartialType(CreateCatDto) {}
-   ```</p>
+<pre><code class="language-typescript">   import { PartialType } from '@nestjs/mapped-types';
+   import { CreateCatDto } from './create-cat.dto';
+
+   export class UpdateCatDto extends PartialType(CreateCatDto) {}
+</code></pre>
 <ul>
 <li>
 <p><strong>PartialType:</strong> Permite que todos los campos del DTO original sean opcionales, facilitando actualizaciones parciales.</p>
@@ -2812,29 +2812,29 @@ export class Cat {
 </li>
 </ul>
 <p>Añade un método <code>update</code> en el controlador para manejar las solicitudes de actualización.</p>
-<p>```typescript
-   import { Body, Controller, Param, Patch } from '@nestjs/common';
+<pre><code class="language-typescript">   import { Body, Controller, Param, Patch } from '@nestjs/common';
    import { UpdateCatDto } from './dto/update-cat.dto';
-   import { CatsService } from './cats.service';</p>
-<p>@Controller('cats')
+   import { CatsService } from './cats.service';
+
+   @Controller('cats')
    export class CatsController {
-     constructor(private readonly catsService: CatsService) {}</p>
-<pre><code> @Patch(':id')
- async update(@Param('id') id: number, @Body() updateCatDto: UpdateCatDto) {
-   return this.catsService.update(id, updateCatDto);
- }
+     constructor(private readonly catsService: CatsService) {}
+
+     @Patch(':id')
+     async update(@Param('id') id: number, @Body() updateCatDto: UpdateCatDto) {
+       return this.catsService.update(id, updateCatDto);
+     }
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ol>
 <li><strong>Actualizar el Servicio:</strong></li>
 </ol>
 <p>Implementa el método <code>update</code> en el servicio, utilizando el repositorio para actualizar el registro.</p>
-<p><code>typescript
-   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
+<pre><code class="language-typescript">   async update(id: number, updateCatDto: UpdateCatDto): Promise&lt;Cat&gt; {
      await this.catsRepository.update(id, updateCatDto);
      return this.catsRepository.findOneBy({ id });
-   }</code></p>
+   }
+</code></pre>
 <h3 id="consideraciones-para-la-actualizacion">Consideraciones para la Actualización</h3>
 <ul>
 <li><strong>Validación de Datos:</strong> Asegura que los datos de entrada cumplen con los requisitos antes de actualizar.</li>
@@ -2856,38 +2856,38 @@ export class Cat {
 <ol>
 <li><strong>Definir las Entidades:</strong></li>
 </ol>
-<p>```typescript
-   // cat.entity.ts
+<pre><code class="language-typescript">   // cat.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-   import { Photo } from './photo.entity';</p>
-<p>@Entity()
+   import { Photo } from './photo.entity';
+
+   @Entity()
    export class Cat {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- name: string;
+     id: number;
 
- @OneToMany(() =&gt; Photo, (photo) =&gt; photo.cat)
- photos: Photo[];
+     @Column()
+     name: string;
+
+     @OneToMany(() =&gt; Photo, (photo) =&gt; photo.cat)
+     photos: Photo[];
+   }
 </code></pre>
-<p>}
-   ```</p>
-<p>```typescript
-   // photo.entity.ts
+<pre><code class="language-typescript">   // photo.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-   import { Cat } from './cat.entity';</p>
-<p>@Entity()
+   import { Cat } from './cat.entity';
+
+   @Entity()
    export class Photo {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- url: string;
+     id: number;
 
- @ManyToOne(() =&gt; Cat, (cat) =&gt; cat.photos)
- cat: Cat;
+     @Column()
+     url: string;
+
+     @ManyToOne(() =&gt; Cat, (cat) =&gt; cat.photos)
+     cat: Cat;
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ol>
 <li>
 <p><strong>Gestión de las Relaciones:</strong></p>
@@ -2908,39 +2908,39 @@ export class Cat {
 <ol>
 <li><strong>Definir las Entidades:</strong></li>
 </ol>
-<p>```typescript
-   // cat.entity.ts
+<pre><code class="language-typescript">   // cat.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
-   import { Toy } from './toy.entity';</p>
-<p>@Entity()
+   import { Toy } from './toy.entity';
+
+   @Entity()
    export class Cat {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- name: string;
+     id: number;
 
- @ManyToMany(() =&gt; Toy, (toy) =&gt; toy.cats)
- @JoinTable()
- toys: Toy[];
+     @Column()
+     name: string;
+
+     @ManyToMany(() =&gt; Toy, (toy) =&gt; toy.cats)
+     @JoinTable()
+     toys: Toy[];
+   }
 </code></pre>
-<p>}
-   ```</p>
-<p>```typescript
-   // toy.entity.ts
+<pre><code class="language-typescript">   // toy.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
-   import { Cat } from './cat.entity';</p>
-<p>@Entity()
+   import { Cat } from './cat.entity';
+
+   @Entity()
    export class Toy {
      @PrimaryGeneratedColumn()
-     id: number;</p>
-<pre><code> @Column()
- name: string;
+     id: number;
 
- @ManyToMany(() =&gt; Cat, (cat) =&gt; cat.toys)
- cats: Cat[];
+     @Column()
+     name: string;
+
+     @ManyToMany(() =&gt; Cat, (cat) =&gt; cat.toys)
+     cats: Cat[];
+   }
 </code></pre>
-<p>}
-   ```</p>
 <h3 id="ventajas-de-utilizar-relaciones-en-sql">Ventajas de Utilizar Relaciones en SQL</h3>
 <ul>
 <li><strong>Normalización de Datos:</strong> Evita la redundancia y asegura la integridad de los datos.</li>
