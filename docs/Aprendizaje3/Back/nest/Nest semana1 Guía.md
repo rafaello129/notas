@@ -289,7 +289,7 @@ npm install --save class-validator class-transformer
 
    Utiliza el pipe de validación proporcionado por NestJS para aplicar las validaciones definidas en los DTOs.
 
-   ```typescript
+```typescript
    import { Body, Controller, Post } from '@nestjs/common';
    import { CreateCatDto } from './dto/create-cat.dto';
    import { CatsService } from './cats.service';
@@ -303,13 +303,13 @@ npm install --save class-validator class-transformer
        return this.catsService.create(createCatDto);
      }
    }
-   ```
+```
 
 3. **Habilitar Validaciones Globales:**
 
    En el archivo `main.ts`, habilita el pipe de validación global para que todas las solicitudes pasen por las validaciones definidas en los DTOs.
 
-   ```typescript
+```typescript
    import { ValidationPipe } from '@nestjs/common';
    import { NestFactory } from '@nestjs/core';
    import { AppModule } from './app.module';
@@ -320,7 +320,7 @@ npm install --save class-validator class-transformer
      await app.listen(3000);
    }
    bootstrap();
-   ```
+```
 
 ### Ventajas de Usar Class Validator
 
@@ -340,7 +340,7 @@ Para conectar NestJS con MySQL utilizando TypeORM, es necesario configurar los d
 
 1. **Editar `app.module.ts`:**
 
-   ```typescript
+```typescript
    import { Module } from '@nestjs/common';
    import { TypeOrmModule } from '@nestjs/typeorm';
    import { CatsModule } from './cats/cats.module';
@@ -363,7 +363,7 @@ Para conectar NestJS con MySQL utilizando TypeORM, es necesario configurar los d
      providers: [],
    })
    export class AppModule {}
-   ```
+```
 
    - **Type:** Tipo de base de datos (`mysql`).
    - **Host:** `localhost` si está ejecutándose localmente.
@@ -400,7 +400,7 @@ El **Repository Pattern** es un patrón de diseño que abstrae la lógica de acc
 
    En el servicio, inyecta el repositorio correspondiente a la entidad.
 
-   ```typescript
+```typescript
    import { Injectable } from '@nestjs/common';
    import { InjectRepository } from '@nestjs/typeorm';
    import { Repository } from 'typeorm';
@@ -425,7 +425,7 @@ El **Repository Pattern** es un patrón de diseño que abstrae la lógica de acc
 
      // Otros métodos CRUD
    }
-   ```
+```
 
 2. **Uso del Repositorio:**
 
@@ -447,7 +447,7 @@ Una **Entity** en TypeORM representa una tabla en la base de datos y cada instan
 
    Crea un archivo `cat.entity.ts` en la carpeta `entities` dentro del módulo `cats`.
 
-   ```typescript
+```typescript
    import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
    @Entity()
@@ -464,7 +464,7 @@ Una **Entity** en TypeORM representa una tabla en la base de datos y cada instan
      @Column()
      breed: string;
    }
-   ```
+```
 
    - **@Entity():** Marca la clase como una entidad que TypeORM gestionará.
    - **@PrimaryGeneratedColumn():** Define la columna `id` como una clave primaria auto-generada.
@@ -517,55 +517,55 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
 
 1. **Crear un Nuevo Cat:**
 
-   ```typescript
+```typescript
    async create(createCatDto: CreateCatDto): Promise<Cat> {
      const cat = this.catsRepository.create(createCatDto);
      return this.catsRepository.save(cat);
    }
-   ```
+```
 
    - **create:** Crea una nueva instancia de la entidad `Cat` con los datos proporcionados.
    - **save:** Persiste la entidad en la base de datos.
 
 2. **Obtener Todos los Cats:**
 
-   ```typescript
+```typescript
    findAll(): Promise<Cat[]> {
      return this.catsRepository.find();
    }
-   ```
+```
 
    - **find:** Recupera todas las entidades `Cat` de la base de datos.
 
 3. **Obtener un Cat por ID:**
 
-   ```typescript
+```typescript
    findOne(id: number): Promise<Cat> {
      return this.catsRepository.findOneBy({ id });
    }
-   ```
+```
 
    - **findOneBy:** Busca una entidad `Cat` específica por su `id`.
 
 4. **Actualizar un Cat:**
 
-   ```typescript
+```typescript
    async update(id: number, updateCatDto: UpdateCatDto): Promise<Cat> {
      await this.catsRepository.update(id, updateCatDto);
      return this.catsRepository.findOneBy({ id });
    }
-   ```
+```
 
    - **update:** Actualiza los datos de una entidad `Cat` existente.
    - **findOneBy:** Recupera la entidad actualizada.
 
 5. **Eliminar un Cat:**
 
-   ```typescript
+```typescript
    async remove(id: number): Promise<void> {
      await this.catsRepository.delete(id);
    }
-   ```
+```
 
    - **delete:** Elimina una entidad `Cat` de la base de datos.
 
@@ -589,7 +589,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
 
    Crea un archivo `create-cat.dto.ts` en la carpeta `dto` dentro del módulo `cats`.
 
-   ```typescript
+```typescript
    import { IsString, IsInt, Min, Max } from 'class-validator';
 
    export class CreateCatDto {
@@ -604,7 +604,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
      @IsString()
      readonly breed: string;
    }
-   ```
+```
 
    - **Decoradores de Validación:**
      - `@IsString()`: Asegura que el valor es una cadena de texto.
@@ -615,7 +615,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
 
    Aplica el DTO en el método `create` del controlador para validar los datos de entrada.
 
-   ```typescript
+```typescript
    import { Body, Controller, Post } from '@nestjs/common';
    import { CreateCatDto } from './dto/create-cat.dto';
    import { CatsService } from './cats.service';
@@ -629,7 +629,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
        return this.catsService.create(createCatDto);
      }
    }
-   ```
+```
 
 ### Ventajas de Usar DTOs
 
@@ -651,7 +651,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
 
    En la entidad `Cat`, añade un campo `deletedAt` que almacenará la fecha de eliminación.
 
-   ```typescript
+```typescript
    import { Entity, Column, PrimaryGeneratedColumn, DeleteDateColumn } from 'typeorm';
 
    @Entity()
@@ -671,7 +671,7 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
      @DeleteDateColumn()
      deletedAt?: Date;
    }
-   ```
+```
 
    - **@DeleteDateColumn():** Marca la columna para almacenar la fecha de eliminación suave.
 
@@ -679,31 +679,31 @@ Una vez definidas las entidades y configurado el repositorio, se pueden implemen
 
    TypeORM maneja automáticamente las eliminaciones suaves si se usa el método `softDelete`.
 
-   ```typescript
+```typescript
    async remove(id: number): Promise<void> {
      await this.catsRepository.softDelete(id);
    }
-   ```
+```
 
 3. **Recuperar Registros Eliminados Suavemente:**
 
    Utiliza el método `restore` para recuperar un registro eliminado.
 
-   ```typescript
+```typescript
    async restore(id: number): Promise<void> {
      await this.catsRepository.restore(id);
    }
-   ```
+```
 
 4. **Filtrar Registros Eliminados:**
 
    Por defecto, TypeORM excluye los registros eliminados suavemente en las consultas. Para incluirlos, se puede usar el parámetro `withDeleted`.
 
-   ```typescript
+```typescript
    findAll(): Promise<Cat[]> {
      return this.catsRepository.find({ withDeleted: true });
    }
-   ```
+```
 
 ### Ventajas de Soft Delete
 
@@ -730,12 +730,12 @@ Actualizar registros en una API RESTful es una operación fundamental. En NestJS
 
    Define un DTO que permita actualizar campos específicos de la entidad `Cat`.
 
-   ```typescript
+```typescript
    import { PartialType } from '@nestjs/mapped-types';
    import { CreateCatDto } from './create-cat.dto';
 
    export class UpdateCatDto extends PartialType(CreateCatDto) {}
-   ```
+```
 
    - **PartialType:** Permite que todos los campos del DTO original sean opcionales, facilitando actualizaciones parciales.
 
@@ -743,7 +743,7 @@ Actualizar registros en una API RESTful es una operación fundamental. En NestJS
 
    Añade un método `update` en el controlador para manejar las solicitudes de actualización.
 
-   ```typescript
+```typescript
    import { Body, Controller, Param, Patch } from '@nestjs/common';
    import { UpdateCatDto } from './dto/update-cat.dto';
    import { CatsService } from './cats.service';
@@ -757,18 +757,18 @@ Actualizar registros en una API RESTful es una operación fundamental. En NestJS
        return this.catsService.update(id, updateCatDto);
      }
    }
-   ```
+```
 
 3. **Actualizar el Servicio:**
 
    Implementa el método `update` en el servicio, utilizando el repositorio para actualizar el registro.
 
-   ```typescript
+```typescript
    async update(id: number, updateCatDto: UpdateCatDto): Promise<Cat> {
      await this.catsRepository.update(id, updateCatDto);
      return this.catsRepository.findOneBy({ id });
    }
-   ```
+```
 
 ### Consideraciones para la Actualización
 
@@ -796,7 +796,7 @@ Ejemplo: Un `Cat` puede tener muchas `Photo`.
 
 1. **Definir las Entidades:**
 
-   ```typescript
+```typescript
    // cat.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
    import { Photo } from './photo.entity';
@@ -812,9 +812,9 @@ Ejemplo: Un `Cat` puede tener muchas `Photo`.
      @OneToMany(() => Photo, (photo) => photo.cat)
      photos: Photo[];
    }
-   ```
+```
 
-   ```typescript
+```typescript
    // photo.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
    import { Cat } from './cat.entity';
@@ -830,7 +830,7 @@ Ejemplo: Un `Cat` puede tener muchas `Photo`.
      @ManyToOne(() => Cat, (cat) => cat.photos)
      cat: Cat;
    }
-   ```
+```
 
 2. **Gestión de las Relaciones:**
 
@@ -845,7 +845,7 @@ Ejemplo: Un `Cat` puede tener múltiples `Toys` y un `Toy` puede pertenecer a m�
 
 1. **Definir las Entidades:**
 
-   ```typescript
+```typescript
    // cat.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
    import { Toy } from './toy.entity';
@@ -862,9 +862,9 @@ Ejemplo: Un `Cat` puede tener múltiples `Toys` y un `Toy` puede pertenecer a m�
      @JoinTable()
      toys: Toy[];
    }
-   ```
+```
 
-   ```typescript
+```typescript
    // toy.entity.ts
    import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
    import { Cat } from './cat.entity';
@@ -880,7 +880,7 @@ Ejemplo: Un `Cat` puede tener múltiples `Toys` y un `Toy` puede pertenecer a m�
      @ManyToMany(() => Cat, (cat) => cat.toys)
      cats: Cat[];
    }
-   ```
+```
 
 ### Ventajas de Utilizar Relaciones en SQL
 
