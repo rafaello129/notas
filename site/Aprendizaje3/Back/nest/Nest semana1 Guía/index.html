@@ -2379,21 +2379,21 @@ volumes:
 <li><strong>Crear DTOs con Validaciones:</strong></li>
 </ol>
 <p>Define DTOs (Data Transfer Objects) utilizando decoradores de validación para asegurar que los datos recibidos cumplen con los requisitos.</p>
-<p>```typescript
-   import { IsString, IsInt, Min, Max } from 'class-validator';</p>
-<p>export class CreateCatDto {
-     @IsString()
-     readonly name: string;</p>
-<pre><code> @IsInt()
- @Min(0)
- @Max(30)
- readonly age: number;
+<pre><code class="language-typescript">   import { IsString, IsInt, Min, Max } from 'class-validator';
 
- @IsString()
- readonly breed: string;
+   export class CreateCatDto {
+     @IsString()
+     readonly name: string;
+
+     @IsInt()
+     @Min(0)
+     @Max(30)
+     readonly age: number;
+
+     @IsString()
+     readonly breed: string;
+   }
 </code></pre>
-<p>}
-   ```</p>
 <ol>
 <li><strong>Aplicar Validaciones en el Controlador:</strong></li>
 </ol>

@@ -268,7 +268,7 @@ npm install --save class-validator class-transformer
 
    Define DTOs (Data Transfer Objects) utilizando decoradores de validación para asegurar que los datos recibidos cumplen con los requisitos.
 
-   ```typescript
+```typescript
    import { IsString, IsInt, Min, Max } from 'class-validator';
 
    export class CreateCatDto {
@@ -283,7 +283,7 @@ npm install --save class-validator class-transformer
      @IsString()
      readonly breed: string;
    }
-   ```
+```
 
 2. **Aplicar Validaciones en el Controlador:**
 
