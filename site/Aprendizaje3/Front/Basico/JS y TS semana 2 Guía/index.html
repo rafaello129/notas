@@ -1,0 +1,2502 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../semana%202/">
+      
+      
+        <link rel="next" href="../../React/Introducci%C3%B3n/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
+    
+    
+      
+        <title>JavaScript y TypeScript - Notas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#javascript-y-typescript" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Notas" class="md-header__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JavaScript y TypeScript
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Notas" class="md-nav__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Notas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Back
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Back
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Nest
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nest
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/Nest%20semana1%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/semana1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con con Nest JS:
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/semana%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    semana 2: Autenticación (Login y Register)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/Nest%20Semana%202%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Semana 2: Autenticación y Autorización con NestJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/semana%203/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    semana 3: Autorización (Roles) con NestJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Back/nest/Nest%20Semana%203%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autorización (Roles) con NestJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Front
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Front
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basico
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basico
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ejemplo%20guiado/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejemplo guiado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Interpretaci%C3%B3n%20del%20curso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interpretación del curso
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Semana%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con HTML y CSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semana%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Semana 2: JavaScript y TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    JavaScript y TypeScript
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    JavaScript y TypeScript
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primera-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primera Aplicación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referenciando-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referenciando Archivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-basicos-en-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Básicos en JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos Básicos en JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reglas-para-nombrar-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reglas para Nombrar Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Primitivos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constantes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-dinamico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado Dinámico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comentarios
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#argumentos-y-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Argumentos y Parámetros
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operadores-en-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores en JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operadores en JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaraciones-y-expresiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Declaraciones y Expresiones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-aritmeticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Aritméticos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-asignacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Asignación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-comparacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Comparación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Lógicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short Circuit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-bitwise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Bitwise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orden-de-operaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orden de Operaciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador Ternario
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-de-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Flujo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Flujo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operador-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador if
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else" class="md-nav__link">
+    <span class="md-ellipsis">
+      else
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      while
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      do while
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      for
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      for...of
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forin" class="md-nav__link">
+    <span class="md-ellipsis">
+      for...in
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continue-y-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue y Break
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducción a TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es TypeScript?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilacion-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilación en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Herramientas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicio-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inicio con TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos en TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos en TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Básicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-en-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado en Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-en-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado en Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#never-y-void" class="md-nav__link">
+    <span class="md-ellipsis">
+      never y void
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetos en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Alias
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-opcionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propiedades Opcionales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-chaining-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Chaining Operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutabilidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-union-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Union Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-types-e-intersection-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Union Types e Intersection Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Union Types e Intersection Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Union Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intersection Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avanzando-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avanzando con TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avanzando con TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtener-tipos-de-valores-y-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtener Tipos de Valores y Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrays-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrices-y-tuplas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrices y Tuplas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../React/Introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Instalaci%C3%B3n%20de%20Git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Requisitos%20Generales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalar Visual Studio Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del Editor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#primera-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primera Aplicación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referenciando-archivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referenciando Archivos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-basicos-en-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Básicos en JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos Básicos en JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reglas-para-nombrar-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reglas para Nombrar Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Datos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Primitivos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constantes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-dinamico" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado Dinámico
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comentarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comentarios
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#argumentos-y-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Argumentos y Parámetros
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operadores-en-javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores en JavaScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operadores en JavaScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaraciones-y-expresiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Declaraciones y Expresiones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-aritmeticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Aritméticos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-asignacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Asignación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-de-comparacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores de Comparación
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Lógicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#short-circuit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Short Circuit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-bitwise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores Bitwise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orden-de-operaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Orden de Operaciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador Ternario
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-de-flujo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Flujo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Flujo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#operador-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operador if
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else" class="md-nav__link">
+    <span class="md-ellipsis">
+      else
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      while
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      do while
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      for
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forof" class="md-nav__link">
+    <span class="md-ellipsis">
+      for...of
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forin" class="md-nav__link">
+    <span class="md-ellipsis">
+      for...in
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continue-y-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continue y Break
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      switch
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduccion-a-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducción a TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducción a TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#que-es-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      ¿Qué es TypeScript?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilacion-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compilación en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Herramientas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicio-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inicio con TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos en TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos en TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-basicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos Básicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-en-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado en Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipado-en-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipado en Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#never-y-void" class="md-nav__link">
+    <span class="md-ellipsis">
+      never y void
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetos en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Alias
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-opcionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propiedades Opcionales
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-chaining-operator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Chaining Operator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mutabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutabilidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-union-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Union Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#union-types-e-intersection-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Union Types e Intersection Types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Union Types e Intersection Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Union Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersection-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intersection Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avanzando-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avanzando con TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Avanzando con TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#type-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Type Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtener-tipos-de-valores-y-funciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Obtener Tipos de Valores y Funciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arrays-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays en TypeScript
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrices-y-tuplas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrices y Tuplas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="javascript-y-typescript">JavaScript y TypeScript</h1>
+<h3 id="configuracion-del-editor">Configuración del Editor</h3>
+<ul>
+<li>
+<p>Instala extensiones útiles como:</p>
+</li>
+<li>
+<p><strong>ESLint</strong>: Para mantener un código limpio y consistente.</p>
+</li>
+<li><strong>Prettier</strong>: Para formatear el código automáticamente.</li>
+<li><strong>TypeScript</strong>: Proporciona soporte para TypeScript en el editor.</li>
+</ul>
+<h3 id="primera-aplicacion">Primera Aplicación</h3>
+<p>Crea un directorio para tus proyectos y, dentro de él, un archivo <code>index.html</code> y un archivo <code>app.js</code>.</p>
+<p><strong>index.html</strong>:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+  &lt;title&gt;Mi Primera Aplicación&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;¡Hola, Mundo!&lt;/h1&gt;
+  &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>app.js</strong>:</p>
+<pre><code class="language-javascript">console.log('¡Hola desde app.js!');
+</code></pre>
+<p>Abre <code>index.html</code> en tu navegador y observa el mensaje en la consola.</p>
+<h3 id="referenciando-archivos">Referenciando Archivos</h3>
+<p>Es importante enlazar correctamente tus archivos JavaScript en el HTML. Utiliza la etiqueta <code>&lt;script src="app.js"&gt;&lt;/script&gt;</code> justo antes de cerrar el <code>&lt;/body&gt;</code> para asegurarte de que el DOM se haya cargado antes de ejecutar el script.</p>
+<hr />
+<h2 id="tipos-basicos-en-javascript">Tipos Básicos en JavaScript</h2>
+<h3 id="variables">Variables</h3>
+<p>Las variables son contenedores para almacenar datos. En JavaScript, puedes declararlas utilizando <code>var</code>, <code>let</code> o <code>const</code>.</p>
+<ul>
+<li><strong>var</strong>: Tiene un alcance de función y puede ser redeclarada.</li>
+<li><strong>let</strong>: Tiene un alcance de bloque y puede ser reasignada, pero no redeclarada.</li>
+<li><strong>const</strong>: Tiene un alcance de bloque y no puede ser reasignada ni redeclarada.</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let nombre = 'Juan';
+const edad = 30;
+var ciudad = 'Madrid';
+</code></pre>
+<h3 id="reglas-para-nombrar-variables">Reglas para Nombrar Variables</h3>
+<ul>
+<li>Deben comenzar con una letra, <code>$</code> o <code>_</code>.</li>
+<li>No pueden comenzar con un número.</li>
+<li>Son <strong>case-sensitive</strong> (<code>nombre</code> y <code>Nombre</code> son diferentes).</li>
+<li>No pueden usar palabras reservadas.</li>
+</ul>
+<h3 id="tipos-de-datos">Tipos de Datos</h3>
+<p>JavaScript tiene tipos de datos <strong>primitivos</strong> y <strong>objetos</strong>.</p>
+<h4 id="tipos-primitivos">Tipos Primitivos</h4>
+<ul>
+<li><strong>string</strong>: Cadenas de texto.</li>
+</ul>
+<p><code>javascript
+  let mensaje = 'Hola, Mundo';</code></p>
+<ul>
+<li><strong>number</strong>: Números (enteros y decimales).</li>
+</ul>
+<p><code>javascript
+  let temperatura = 25.5;</code></p>
+<ul>
+<li><strong>boolean</strong>: Verdadero o falso.</li>
+</ul>
+<p><code>javascript
+  let esMayorDeEdad = true;</code></p>
+<ul>
+<li>
+<p><strong>undefined</strong>: Valor asignado automáticamente a variables no inicializadas.</p>
+</li>
+<li>
+<p><strong>null</strong>: Representa ausencia de valor.</p>
+</li>
+<li>
+<p><strong>symbol</strong>: Tipo único introducido en ES6.</p>
+</li>
+</ul>
+<h4 id="constantes">Constantes</h4>
+<p>Utiliza <code>const</code> para declarar constantes, valores que no cambian durante la ejecución.</p>
+<pre><code class="language-javascript">const PI = 3.1416;
+</code></pre>
+<h4 id="tipado-dinamico">Tipado Dinámico</h4>
+<p>JavaScript es un lenguaje de tipado dinámico; una variable puede contener valores de diferentes tipos en distintos momentos.</p>
+<pre><code class="language-javascript">let valor = 42;
+valor = 'Ahora soy una cadena';
+</code></pre>
+<h4 id="comentarios">Comentarios</h4>
+<ul>
+<li><strong>Comentario de una línea</strong>: <code>// Comentario</code></li>
+<li><strong>Comentario de múltiples líneas</strong>:</li>
+</ul>
+<p><code>javascript
+  /*
+    Este es un
+    comentario de
+    múltiples líneas
+  */</code></p>
+<h3 id="objetos">Objetos</h3>
+<p>Los objetos son colecciones de pares clave-valor.</p>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let persona = {
+  nombre: 'Ana',
+  edad: 28,
+  ciudad: 'Barcelona',
+};
+</code></pre>
+<p>Accedes a sus propiedades usando la notación de punto o corchetes:</p>
+<pre><code class="language-javascript">console.log(persona.nombre); // 'Ana'
+console.log(persona['edad']); // 28
+</code></pre>
+<h3 id="arrays">Arrays</h3>
+<p>Los arrays son listas ordenadas de elementos.</p>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let colores = ['rojo', 'verde', 'azul'];
+</code></pre>
+<p>Accedes a sus elementos mediante índices:</p>
+<pre><code class="language-javascript">console.log(colores[0]); // 'rojo'
+</code></pre>
+<h3 id="funciones">Funciones</h3>
+<p>Las funciones son bloques de código reutilizables.</p>
+<p><strong>Declaración de función</strong>:</p>
+<pre><code class="language-javascript">function saludar(nombre) {
+  return `Hola, ${nombre}`;
+}
+</code></pre>
+<p><strong>Expresión de función</strong>:</p>
+<pre><code class="language-javascript">const saludar = function (nombre) {
+  return `Hola, ${nombre}`;
+};
+</code></pre>
+<h3 id="argumentos-y-parametros">Argumentos y Parámetros</h3>
+<ul>
+<li><strong>Parámetros</strong>: Variables definidas en la declaración de la función.</li>
+<li><strong>Argumentos</strong>: Valores pasados a la función al invocarla.</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">function sumar(a, b) {
+  return a + b;
+}
+
+let resultado = sumar(5, 3); // a = 5, b = 3
+</code></pre>
+<hr />
+<h2 id="operadores-en-javascript">Operadores en JavaScript</h2>
+<h3 id="declaraciones-y-expresiones">Declaraciones y Expresiones</h3>
+<ul>
+<li><strong>Declaraciones</strong>: Instrucciones que realizan una acción.</li>
+</ul>
+<p><code>javascript
+  let x = 10;</code></p>
+<ul>
+<li><strong>Expresiones</strong>: Fragmentos de código que producen un valor.</li>
+</ul>
+<p><code>javascript
+  x + y;</code></p>
+<h3 id="operadores-aritmeticos">Operadores Aritméticos</h3>
+<ul>
+<li><strong>Suma (+)</strong>: <code>a + b</code></li>
+<li><strong>Resta (-)</strong>: <code>a - b</code></li>
+<li><strong>Multiplicación (*)</strong>: <code>a * b</code></li>
+<li><strong>División (/)</strong>: <code>a / b</code></li>
+<li><strong>Módulo (%)</strong>: <code>a % b</code> (resto de la división)</li>
+<li><strong>Incremento (++)</strong>: <code>a++</code> o <code>++a</code></li>
+<li><strong>Decremento (--):</strong> <code>a--</code> o <code>--a</code></li>
+</ul>
+<h3 id="operadores-de-asignacion">Operadores de Asignación</h3>
+<ul>
+<li><strong>Asignación (=)</strong>: <code>a = b</code></li>
+<li>
+<p><strong>Asignación con operación</strong>:</p>
+</li>
+<li>
+<p><code>a += b</code> (equivale a <code>a = a + b</code>)</p>
+</li>
+<li><code>a -= b</code></li>
+<li><code>a *= b</code></li>
+<li><code>a /= b</code></li>
+</ul>
+<h3 id="operadores-de-comparacion">Operadores de Comparación</h3>
+<ul>
+<li><strong>Igualdad estricta (=== ):</strong> Compara valor y tipo.</li>
+<li><strong>Desigualdad estricta (!== )</strong></li>
+<li><strong>Mayor que (&gt;)</strong>, <strong>Menor que (&lt;)</strong></li>
+<li><strong>Mayor o igual que (&gt;=)</strong>, <strong>Menor o igual que (&lt;=)</strong></li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let esIgual = (5 === '5'); // false
+</code></pre>
+<h3 id="operadores-logicos">Operadores Lógicos</h3>
+<ul>
+<li><strong>AND (&amp;&amp;)</strong>: Verdadero si ambos operandos son verdaderos.</li>
+<li><strong>OR (||)</strong>: Verdadero si al menos uno es verdadero.</li>
+<li><strong>NOT (!)</strong>: Invierte el valor lógico.</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let resultado = (a &gt; 0) &amp;&amp; (b &gt; 0);
+</code></pre>
+<h3 id="short-circuit">Short Circuit</h3>
+<p>En operaciones lógicas, si el primer operando determina el resultado, el segundo no se evalúa.</p>
+<ul>
+<li><strong>AND (&amp;&amp;)</strong>: Si el primer operando es <code>false</code>, el resultado es <code>false</code>.</li>
+<li><strong>OR (||)</strong>: Si el primer operando es <code>true</code>, el resultado es <code>true</code>.</li>
+</ul>
+<h3 id="operadores-bitwise">Operadores Bitwise</h3>
+<p>Operan a nivel de bits. Algunos ejemplos son:</p>
+<ul>
+<li><strong>AND (&amp;)</strong></li>
+<li><strong>OR (|)</strong></li>
+<li><strong>XOR (^)</strong></li>
+<li><strong>NOT (~)</strong></li>
+<li><strong>Shift Left (&lt;&lt;)</strong></li>
+<li><strong>Shift Right (&gt;&gt;)</strong></li>
+</ul>
+<h3 id="orden-de-operaciones">Orden de Operaciones</h3>
+<p>JavaScript sigue un orden de precedencia en las operaciones, similar al matemático. Usa paréntesis <code>()</code> para controlar el orden.</p>
+<h3 id="operador-ternario">Operador Ternario</h3>
+<p>Sintaxis corta para una sentencia <code>if...else</code>.</p>
+<p><strong>Sintaxis</strong>:</p>
+<pre><code class="language-javascript">condición ? expresión_si_verdadero : expresión_si_falso;
+</code></pre>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">let esMayor = edad &gt;= 18 ? 'Sí' : 'No';
+</code></pre>
+<hr />
+<h2 id="control-de-flujo">Control de Flujo</h2>
+<h3 id="operador-if">Operador if</h3>
+<p>Permite ejecutar código basado en una condición.</p>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">if (condición) {
+  // Código a ejecutar si la condición es verdadera
+}
+</code></pre>
+<h3 id="else">else</h3>
+<p>Proporciona una alternativa si la condición es falsa.</p>
+<pre><code class="language-javascript">if (condición) {
+  // Si es verdadera
+} else {
+  // Si es falsa
+}
+</code></pre>
+<h3 id="while">while</h3>
+<p>Ejecuta un bloque de código mientras una condición es verdadera.</p>
+<pre><code class="language-javascript">while (condición) {
+  // Código a ejecutar
+}
+</code></pre>
+<p><strong>Cuidado con los loops infinitos</strong>: Asegúrate de que la condición cambiará en algún momento.</p>
+<h3 id="do-while">do while</h3>
+<p>Similar a <code>while</code>, pero se ejecuta al menos una vez.</p>
+<pre><code class="language-javascript">do {
+  // Código a ejecutar
+} while (condición);
+</code></pre>
+<h3 id="for">for</h3>
+<p>Usado para iterar un número conocido de veces.</p>
+<pre><code class="language-javascript">for (inicialización; condición; actualización) {
+  // Código a ejecutar
+}
+</code></pre>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-javascript">for (let i = 0; i &lt; 5; i++) {
+  console.log(i);
+}
+</code></pre>
+<h3 id="forof">for...of</h3>
+<p>Itera sobre elementos iterables (arrays, strings).</p>
+<pre><code class="language-javascript">for (let elemento of iterable) {
+  // Código a ejecutar
+}
+</code></pre>
+<h3 id="forin">for...in</h3>
+<p>Itera sobre las propiedades enumerables de un objeto.</p>
+<pre><code class="language-javascript">for (let propiedad in objeto) {
+  // Código a ejecutar
+}
+</code></pre>
+<h3 id="continue-y-break">Continue y Break</h3>
+<ul>
+<li><strong>continue</strong>: Salta a la siguiente iteración.</li>
+<li><strong>break</strong>: Sale del loop.</li>
+</ul>
+<h3 id="switch">switch</h3>
+<p>Selecciona entre múltiples opciones.</p>
+<pre><code class="language-javascript">switch (expresión) {
+  case valor1:
+    // Código si expresión === valor1
+    break;
+  case valor2:
+    // Código si expresión === valor2
+    break;
+  default:
+    // Código si ninguno coincide
+}
+</code></pre>
+<hr />
+<h2 id="introduccion-a-typescript">Introducción a TypeScript</h2>
+<h3 id="que-es-typescript">¿Qué es TypeScript?</h3>
+<p>TypeScript es un superset de JavaScript que añade tipado estático y otras características avanzadas. Se compila a JavaScript puro, por lo que puede ejecutarse en cualquier entorno que soporte JavaScript.</p>
+<p>TypeScript requiere un proceso de compilación para convertir el código TypeScript (<code>.ts</code>) a JavaScript (<code>.js</code>).</p>
+<h3 id="compilacion-en-typescript">Compilación en TypeScript</h3>
+<ul>
+<li><strong>Instalar TypeScript</strong> globalmente:</li>
+</ul>
+<p><code>bash
+  npm install -g typescript</code></p>
+<ul>
+<li><strong>Compilar un archivo</strong>:</li>
+</ul>
+<p><code>bash
+  tsc archivo.ts</code></p>
+<h3 id="herramientas">Herramientas</h3>
+<ul>
+<li><strong>tsc</strong>: El compilador de TypeScript.</li>
+<li><strong>ts-node</strong>: Permite ejecutar código TypeScript sin necesidad de compilarlo explícitamente.</li>
+<li><strong>Visual Studio Code</strong>: Tiene excelente soporte para TypeScript.</li>
+</ul>
+<h3 id="inicio-con-typescript">Inicio con TypeScript</h3>
+<ul>
+<li><strong>Crear un proyecto</strong>:</li>
+</ul>
+<p><code>bash
+  mkdir mi-proyecto
+  cd mi-proyecto
+  npm init -y
+  tsc --init</code></p>
+<ul>
+<li><strong>Configuración básica</strong>: El comando <code>tsc --init</code> genera un archivo <code>tsconfig.json</code> para configurar el compilador.</li>
+</ul>
+<hr />
+<h2 id="tipos-en-typescript">Tipos en TypeScript</h2>
+<h3 id="tipos-basicos">Tipos Básicos</h3>
+<ul>
+<li><strong>string</strong></li>
+<li><strong>number</strong></li>
+<li><strong>boolean</strong></li>
+<li><strong>any</strong>: Puede ser de cualquier tipo.</li>
+<li><strong>void</strong>: Ausencia de tipo, generalmente en funciones que no retornan valor.</li>
+<li><strong>null</strong> y <strong>undefined</strong></li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<pre><code class="language-typescript">let nombre: string = 'Laura';
+let edad: number = 25;
+let esActivo: boolean = true;
+</code></pre>
+<h3 id="tipado-en-variables">Tipado en Variables</h3>
+<p>TypeScript puede inferir el tipo de una variable a partir de su valor inicial.</p>
+<pre><code class="language-typescript">let mensaje = 'Hola'; // TypeScript infiere que es string
+</code></pre>
+<h3 id="tipado-en-funciones">Tipado en Funciones</h3>
+<ul>
+<li><strong>Tipado de parámetros</strong>:</li>
+</ul>
+<p><code>typescript
+  function sumar(a: number, b: number): number {
+    return a + b;
+  }</code></p>
+<ul>
+<li><strong>Tipado de retorno</strong>:</li>
+</ul>
+<p><code>typescript
+  function saludar(nombre: string): string {
+    return `Hola, ${nombre}`;
+  }</code></p>
+<h3 id="never-y-void">never y void</h3>
+<ul>
+<li><strong>void</strong>: Indica que una función no retorna un valor.</li>
+</ul>
+<p><code>typescript
+  function logMensaje(mensaje: string): void {
+    console.log(mensaje);
+  }</code></p>
+<ul>
+<li><strong>never</strong>: Indica que una función no finaliza su ejecución (lanza una excepción o entra en un loop infinito).</li>
+</ul>
+<p><code>typescript
+  function error(mensaje: string): never {
+    throw new Error(mensaje);
+  }</code></p>
+<h3 id="objetos-en-typescript">Objetos en TypeScript</h3>
+<p>Puedes definir el tipo de un objeto especificando sus propiedades y tipos.</p>
+<pre><code class="language-typescript">let persona: { nombre: string; edad: number } = {
+  nombre: 'Carlos',
+  edad: 40,
+};
+</code></pre>
+<h3 id="type-alias">Type Alias</h3>
+<p>Permite crear un alias para un tipo.</p>
+<pre><code class="language-typescript">type Punto = {
+  x: number;
+  y: number;
+};
+
+let coordenada: Punto = { x: 10, y: 20 };
+</code></pre>
+<h3 id="propiedades-opcionales">Propiedades Opcionales</h3>
+<p>Usa <code>?</code> para indicar que una propiedad es opcional.</p>
+<pre><code class="language-typescript">type Usuario = {
+  nombre: string;
+  email?: string; // Opcional
+};
+</code></pre>
+<h3 id="optional-chaining-operator">Optional Chaining Operator</h3>
+<p>Permite acceder a propiedades anidadas sin causar errores si alguna es <code>undefined</code> o <code>null</code>.</p>
+<pre><code class="language-typescript">console.log(usuario?.email);
+</code></pre>
+<h3 id="mutabilidad">Mutabilidad</h3>
+<ul>
+<li><strong>Constantes</strong>: Usa <code>const</code> para declarar variables que no cambian de referencia.</li>
+<li><strong>Inmutabilidad de objetos</strong>: Puedes usar <code>Object.freeze()</code> para prevenir modificaciones.</li>
+</ul>
+<h3 id="template-union-types">Template Union Types</h3>
+<p>Combina tipos literales y permite crear cadenas específicas.</p>
+<pre><code class="language-typescript">type Direccion = `${'Norte' | 'Sur'}-${'Este' | 'Oeste'}`;
+let rumbo: Direccion = 'Norte-Este';
+</code></pre>
+<hr />
+<h2 id="union-types-e-intersection-types">Union Types e Intersection Types</h2>
+<h3 id="union-types">Union Types</h3>
+<p>Permite que una variable sea de uno u otro tipo.</p>
+<pre><code class="language-typescript">let resultado: string | number;
+resultado = 'Aprobado';
+resultado = 85;
+</code></pre>
+<h3 id="intersection-types">Intersection Types</h3>
+<p>Combina múltiples tipos en uno solo.</p>
+<pre><code class="language-typescript">type A = { x: number };
+type B = { y: number };
+type C = A &amp; B;
+
+let punto: C = { x: 10, y: 20 };
+</code></pre>
+<hr />
+<h2 id="avanzando-con-typescript">Avanzando con TypeScript</h2>
+<h3 id="type-indexing">Type Indexing</h3>
+<p>Permite acceder a los tipos de las propiedades de un objeto.</p>
+<pre><code class="language-typescript">type Persona = { nombre: string; edad: number };
+type Nombre = Persona['nombre']; // string
+</code></pre>
+<h3 id="obtener-tipos-de-valores-y-funciones">Obtener Tipos de Valores y Funciones</h3>
+<ul>
+<li><strong>typeof</strong>: Obtiene el tipo de una variable o función.</li>
+</ul>
+<p><code>typescript
+  let saludo = 'Hola';
+  type TipoSaludo = typeof saludo; // string</code></p>
+<h3 id="arrays-en-typescript">Arrays en TypeScript</h3>
+<p>Puedes tipar arrays indicando el tipo de sus elementos.</p>
+<pre><code class="language-typescript">let numeros: number[] = [1, 2, 3];
+</code></pre>
+<p>O usando <code>Array&lt;T&gt;</code>:</p>
+<pre><code class="language-typescript">let nombres: Array&lt;string&gt; = ['Ana', 'Luis', 'Pedro'];
+</code></pre>
+<h3 id="matrices-y-tuplas">Matrices y Tuplas</h3>
+<ul>
+<li><strong>Tuplas</strong>: Arrays de longitud y tipos definidos.</li>
+</ul>
+<p><code>typescript
+  let coordenadas: [number, number] = [10, 20];</code></p>
+<hr />
+<p><strong>Recursos Adicionales</strong>:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript">Documentación de JavaScript (MDN)</a></li>
+<li><a href="https://www.typescriptlang.org/docs/">Documentación de TypeScript</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

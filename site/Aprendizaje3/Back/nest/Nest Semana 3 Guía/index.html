@@ -1,0 +1,3138 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../semana%203/">
+      
+      
+        <link rel="next" href="../../../Front/Basico/Ejemplo%20guiado/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.41">
+    
+    
+      
+        <title>Autorización (Roles) con NestJS - Notas</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#autorizacion-roles-con-nestjs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Notas" class="md-header__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Notas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Autorización (Roles) con NestJS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Notas" class="md-nav__button md-logo" aria-label="Notas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Notas
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Back
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Back
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Nest
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            Nest
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nest%20semana1%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NestJS: Creación de una API REST con MySQL, TypeORM y TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semana1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con con Nest JS:
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semana%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    semana 2: Autenticación (Login y Register)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Nest%20Semana%202%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Semana 2: Autenticación y Autorización con NestJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../semana%203/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    semana 3: Autorización (Roles) con NestJS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Autorización (Roles) con NestJS
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Autorización (Roles) con NestJS
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-role-y-jwt-payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Role y JWT Payload
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Role y JWT Payload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadiendo-roles-a-los-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Añadiendo Roles a los Usuarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Añadiendo Roles a los Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incluyendo-el-rol-en-el-payload-del-jwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incluyendo el Rol en el Payload del JWT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Incluyendo el Rol en el Payload del JWT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-login-en-authservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método login en AuthService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-la-estrategia-jwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar la Estrategia JWT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-manual-de-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación Manual de Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verificación Manual de Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en el Controlador
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en el Controlador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-en-catscontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo en CatsController
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorador-personalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorador Personalizado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorador Personalizado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-un-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creando un Decorador Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando un Decorador Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Decorador Roles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#necesidad-de-un-guard-personalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Necesidad de un Guard Personalizado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles Guard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-del-guard-de-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación del Guard de Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación del Guard de Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-guard-rolesguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Guard RolesGuard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-del-guard-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicación del Guard en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums en TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums en TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-enums-para-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Enums para Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso de Enums para Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-enum-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Enum Role
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-decorador-y-el-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Decorador y el Guard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar el Decorador y el Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Decorador Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-guard-rolesguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Guard RolesGuard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unir-varios-decoradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unir Varios Decoradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unir Varios Decoradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#combinacion-de-decoradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combinación de Decoradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinación de Decoradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear un Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ocultar-contrasena" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ocultar Contraseña
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ocultar Contraseña">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excluir-la-contrasena-al-devolver-el-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excluir la Contraseña al Devolver el Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Excluir la Contraseña al Devolver el Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utilizar-exclude-de-class-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizar Exclude de class-transformer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicar-transformacion-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicar Transformación en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-roles-en-entidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enum Roles en Entidad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enum Roles en Entidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-tipo-de-datos-de-role-en-la-entidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Tipo de Datos de role en la Entidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rol-admin-con-privilegios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rol Admin con Privilegios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rol Admin con Privilegios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-privilegios-para-el-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Privilegios para el Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación de Privilegios para el Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proteger-rutas-con-el-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proteger Rutas con el Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorador-request-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorador Request User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorador Request User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-un-decorador-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creando un Decorador User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando un Decorador User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-decorador-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Decorador User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-en-el-controlador_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breed-solo-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breed Solo Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breed Solo Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-operaciones-especificas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Operaciones Específicas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Operaciones Específicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-modulo-breeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Módulo Breeds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacion-entre-cat-y-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relación entre Cat y User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relación entre Cat y User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asociar-los-gatos-cat-con-el-usuario-que-los-crea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asociar los Gatos (Cat) con el Usuario que los Crea
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asociar los Gatos (Cat) con el Usuario que los Crea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad Cat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-user_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-metodo-create-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Método create en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-findall-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Métodos findAll Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos findAll Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtrar-gatos-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrar Gatos por Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtrar Gatos por Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-findall-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método findAll en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-findone-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Método findOne Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método findOne Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restringir-acceso-al-metodo-findone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restringir Acceso al Método findOne
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restringir Acceso al Método findOne">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-findone-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método findOne en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Actualización
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Actualización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-update-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método update en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminar-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Eliminar Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-eliminacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Eliminación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Eliminación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-remove-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método remove en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Front
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Front
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basico
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Basico
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Ejemplo%20guiado/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ejemplo guiado
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Interpretaci%C3%B3n%20del%20curso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interpretación del curso
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/Semana%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guía de Aprendizaje: Introducción al Desarrollo Web con HTML y CSS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/semana%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Semana 2: JavaScript y TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/Basico/JS%20y%20TS%20semana%202%20Gu%C3%ADa/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JavaScript y TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    React
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            React
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Front/React/Introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introducción a React
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Instalaci%C3%B3n%20de%20Git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalación de Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../General/Requisitos%20Generales/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instalar Visual Studio Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-role-y-jwt-payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Role y JWT Payload
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Role y JWT Payload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anadiendo-roles-a-los-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Añadiendo Roles a los Usuarios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Añadiendo Roles a los Usuarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#incluyendo-el-rol-en-el-payload-del-jwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Incluyendo el Rol en el Payload del JWT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Incluyendo el Rol en el Payload del JWT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-login-en-authservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método login en AuthService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-la-estrategia-jwt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar la Estrategia JWT
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion-manual-de-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verificación Manual de Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verificación Manual de Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en el Controlador
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en el Controlador">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-en-catscontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ejemplo en CatsController
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limitaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitaciones
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorador-personalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorador Personalizado
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorador Personalizado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-un-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creando un Decorador Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando un Decorador Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Decorador Roles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#necesidad-de-un-guard-personalizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Necesidad de un Guard Personalizado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles Guard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roles Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-del-guard-de-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación del Guard de Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación del Guard de Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-guard-rolesguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Guard RolesGuard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-del-guard-en-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicación del Guard en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enums-en-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums en TypeScript
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums en TypeScript">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uso-de-enums-para-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso de Enums para Roles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso de Enums para Roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-enum-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Enum Role
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-decorador-y-el-guard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Decorador y el Guard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar el Decorador y el Guard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-decorador-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Decorador Roles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-guard-rolesguard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Guard RolesGuard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unir-varios-decoradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unir Varios Decoradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unir Varios Decoradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#combinacion-de-decoradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combinación de Decoradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinación de Decoradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crear un Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ocultar-contrasena" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ocultar Contraseña
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ocultar Contraseña">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excluir-la-contrasena-al-devolver-el-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Excluir la Contraseña al Devolver el Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Excluir la Contraseña al Devolver el Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#utilizar-exclude-de-class-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilizar Exclude de class-transformer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicar-transformacion-en-el-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aplicar Transformación en el Servicio
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enum-roles-en-entidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enum Roles en Entidad
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enum Roles en Entidad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-tipo-de-datos-de-role-en-la-entidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Tipo de Datos de role en la Entidad
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ventajas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ventajas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rol-admin-con-privilegios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rol Admin con Privilegios
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rol Admin con Privilegios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-de-privilegios-para-el-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación de Privilegios para el Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación de Privilegios para el Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proteger-rutas-con-el-decorador-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proteger Rutas con el Decorador Auth
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decorador-request-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decorador Request User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decorador Request User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creando-un-decorador-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creando un Decorador User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creando un Decorador User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-decorador-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Decorador User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-del-decorador-en-el-controlador_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Uso del Decorador en el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#breed-solo-rol-admin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breed Solo Rol Admin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Breed Solo Rol Admin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-operaciones-especificas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Operaciones Específicas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Operaciones Específicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definir-el-modulo-breeds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definir el Módulo Breeds
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacion-entre-cat-y-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relación entre Cat y User
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relación entre Cat y User">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asociar-los-gatos-cat-con-el-usuario-que-los-crea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Asociar los Gatos (Cat) con el Usuario que los Crea
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Asociar los Gatos (Cat) con el Usuario que los Crea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad Cat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-la-entidad-user_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar la Entidad User
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-metodo-create-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Método create en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-findall-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Métodos findAll Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos findAll Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtrar-gatos-por-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filtrar Gatos por Usuario
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtrar Gatos por Usuario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-findall-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método findAll en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-findone-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Método findOne Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Método findOne Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restringir-acceso-al-metodo-findone" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restringir Acceso al Método findOne
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Restringir Acceso al Método findOne">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-findone-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método findOne en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizar-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actualizar Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Actualización
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Actualización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-update-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método update en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eliminar-cat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Eliminar Cat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Eliminar Cat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-de-acceso-en-eliminacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control de Acceso en Eliminación
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control de Acceso en Eliminación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-metodo-remove-en-catsservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modificar el Método remove en CatsService
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualizar-el-controlador_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actualizar el Controlador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="autorizacion-roles-con-nestjs">Autorización (Roles) con NestJS</h1>
+<p>Nos enfocaremos en la <strong>autorización</strong>, es decir, controlar el acceso a recursos según los <strong>roles</strong> de usuario.</p>
+<hr />
+<h2 id="user-role-y-jwt-payload">User Role y JWT Payload</h2>
+<h3 id="anadiendo-roles-a-los-usuarios">Añadiendo Roles a los Usuarios</h3>
+<p>Para implementar la autorización basada en roles, primero debemos asociar roles a nuestros usuarios.</p>
+<h4 id="modificar-la-entidad-user">Modificar la Entidad <code>User</code></h4>
+<p>Agregamos una nueva propiedad <code>role</code> a nuestra entidad <code>User</code>.</p>
+<p><strong>users/entities/user.entity.ts</strong></p>
+<pre><code class="language-typescript">import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ unique: true })
+  username: string;
+
+  @Column()
+  password: string;
+
+  @Column({ default: 'user' })
+  role: string;
+}
+</code></pre>
+<ul>
+<li><strong><code>role</code>:</strong> Indica el rol del usuario. Puede ser <code>'user'</code>, <code>'admin'</code>, etc.</li>
+<li><strong><code>default: 'user'</code>:</strong> Establece el rol por defecto como <code>'user'</code>.</li>
+</ul>
+<h3 id="incluyendo-el-rol-en-el-payload-del-jwt">Incluyendo el Rol en el Payload del JWT</h3>
+<p>Cuando generamos el token JWT, podemos incluir información adicional en el <strong>payload</strong>.</p>
+<h4 id="modificar-el-metodo-login-en-authservice">Modificar el Método <code>login</code> en <code>AuthService</code></h4>
+<p><strong>auth/auth.service.ts</strong></p>
+<pre><code class="language-typescript">async login(loginAuthDto: LoginAuthDto) {
+  // ... Validación de credenciales
+
+  const payload = { username: user.username, sub: user.id, role: user.role };
+  return {
+    access_token: this.jwtService.sign(payload),
+  };
+}
+</code></pre>
+<ul>
+<li><strong><code>role: user.role</code>:</strong> Añadimos el rol del usuario al payload del token.</li>
+</ul>
+<h3 id="actualizar-la-estrategia-jwt">Actualizar la Estrategia JWT</h3>
+<p>Necesitamos asegurarnos de que el rol esté disponible en el contexto de la solicitud.</p>
+<p><strong>auth/jwt.strategy.ts</strong></p>
+<pre><code class="language-typescript">async validate(payload: any) {
+  return { userId: payload.sub, username: payload.username, role: payload.role };
+}
+</code></pre>
+<ul>
+<li>Ahora, el objeto <code>req.user</code> incluirá <code>userId</code>, <code>username</code> y <code>role</code>.</li>
+</ul>
+<hr />
+<h2 id="verificacion-manual-de-rol-admin">Verificación Manual de Rol Admin</h2>
+<h3 id="control-de-acceso-en-el-controlador">Control de Acceso en el Controlador</h3>
+<p>Podemos verificar el rol del usuario directamente en el controlador para proteger ciertas rutas.</p>
+<h4 id="ejemplo-en-catscontroller">Ejemplo en <code>CatsController</code></h4>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get, UseGuards, Request, ForbiddenException } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+@Controller('cats')
+export class CatsController {
+  @UseGuards(JwtAuthGuard)
+  @Get('admin')
+  findAllAdmin(@Request() req) {
+    if (req.user.role !== 'admin') {
+      throw new ForbiddenException('Access denied');
+    }
+    // Código para usuarios con rol admin
+    return this.catsService.findAll();
+  }
+}
+</code></pre>
+<ul>
+<li><strong>Verificación del Rol:</strong> Comprobamos si <code>req.user.role</code> es <code>'admin'</code>.</li>
+<li><strong>Manejo de Excepciones:</strong> Si el rol no es <code>'admin'</code>, lanzamos una <code>ForbiddenException</code>.</li>
+</ul>
+<h3 id="limitaciones">Limitaciones</h3>
+<ul>
+<li><strong>Repetitivo:</strong> Tener que verificar manualmente el rol en cada ruta puede ser tedioso y propenso a errores.</li>
+<li><strong>Mejoras:</strong> Podemos crear un <strong>Guard personalizado</strong> para manejar esta lógica de manera centralizada.</li>
+</ul>
+<hr />
+<h2 id="decorador-personalizado">Decorador Personalizado</h2>
+<h3 id="creando-un-decorador-roles">Creando un Decorador <code>Roles</code></h3>
+<p>Para simplificar la asignación de roles a las rutas, podemos crear un decorador personalizado.</p>
+<h4 id="definir-el-decorador-roles">Definir el Decorador <code>Roles</code></h4>
+<p><strong>auth/roles.decorator.ts</strong></p>
+<pre><code class="language-typescript">import { SetMetadata } from '@nestjs/common';
+
+export const ROLES_KEY = 'roles';
+export const Roles = (...roles: string[]) =&gt; SetMetadata(ROLES_KEY, roles);
+</code></pre>
+<ul>
+<li><strong><code>SetMetadata</code>:</strong> Función que asigna metadatos a una ruta.</li>
+<li><strong><code>ROLES_KEY</code>:</strong> Clave utilizada para acceder a los metadatos.</li>
+<li><strong><code>Roles</code>:</strong> Decorador que acepta una lista de roles.</li>
+</ul>
+<h3 id="uso-del-decorador-en-el-controlador">Uso del Decorador en el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Roles } from '../auth/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+@Controller('cats')
+export class CatsController {
+  @UseGuards(JwtAuthGuard)
+  @Roles('admin')
+  @Get('admin')
+  findAllAdmin() {
+    // Código para usuarios con rol admin
+    return this.catsService.findAll();
+  }
+}
+</code></pre>
+<ul>
+<li><strong><code>@Roles('admin')</code>:</strong> Especificamos que esta ruta requiere el rol <code>'admin'</code>.</li>
+</ul>
+<h3 id="necesidad-de-un-guard-personalizado">Necesidad de un Guard Personalizado</h3>
+<p>El decorador por sí solo no es suficiente; necesitamos un guard que interprete los metadatos y realice la verificación.</p>
+<hr />
+<h2 id="roles-guard">Roles Guard</h2>
+<h3 id="implementacion-del-guard-de-roles">Implementación del Guard de Roles</h3>
+<p>Crearemos un guard que verifique los roles antes de permitir el acceso a una ruta.</p>
+<h4 id="definir-el-guard-rolesguard">Definir el Guard <code>RolesGuard</code></h4>
+<p><strong>auth/roles.guard.ts</strong></p>
+<pre><code class="language-typescript">import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { ROLES_KEY } from './roles.decorator';
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredRoles = this.reflector.getAllAndOverride&lt;string[]&gt;(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (!requiredRoles) {
+      return true; // Si no hay roles definidos, permitir acceso
+    }
+    const { user } = context.switchToHttp().getRequest();
+    return requiredRoles.includes(user.role);
+  }
+}
+</code></pre>
+<ul>
+<li><strong><code>Reflector</code>:</strong> Servicio para acceder a los metadatos.</li>
+<li><strong><code>canActivate</code>:</strong> Método que determina si el usuario tiene acceso.</li>
+<li><strong><code>requiredRoles</code>:</strong> Obtenemos los roles requeridos de los metadatos.</li>
+</ul>
+<h3 id="aplicacion-del-guard-en-el-controlador">Aplicación del Guard en el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Roles } from '../auth/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+
+@Controller('cats')
+@UseGuards(JwtAuthGuard, RolesGuard)
+export class CatsController {
+  @Roles('admin')
+  @Get('admin')
+  findAllAdmin() {
+    return this.catsService.findAll();
+  }
+
+  @Roles('user', 'admin')
+  @Get()
+  findAll() {
+    return this.catsService.findAll();
+  }
+}
+</code></pre>
+<ul>
+<li><strong><code>@UseGuards(JwtAuthGuard, RolesGuard)</code>:</strong> Aplica ambos guards a todas las rutas del controlador.</li>
+<li><strong><code>@Roles(...)</code>:</strong> Especifica los roles permitidos para cada ruta.</li>
+</ul>
+<h3 id="ventajas">Ventajas</h3>
+<ul>
+<li><strong>Centralización:</strong> La lógica de autorización está centralizada en el guard.</li>
+<li><strong>Reutilización:</strong> Podemos aplicar el guard a múltiples controladores o rutas.</li>
+</ul>
+<hr />
+<h2 id="enums-en-typescript">Enums en TypeScript</h2>
+<h3 id="uso-de-enums-para-roles">Uso de Enums para Roles</h3>
+<p>Para evitar errores tipográficos y facilitar la gestión de roles, utilizamos <strong>Enums</strong> en TypeScript.</p>
+<h4 id="definir-el-enum-role">Definir el Enum <code>Role</code></h4>
+<p><strong>auth/roles.enum.ts</strong></p>
+<pre><code class="language-typescript">export enum Role {
+  User = 'user',
+  Admin = 'admin',
+}
+</code></pre>
+<h3 id="actualizar-el-decorador-y-el-guard">Actualizar el Decorador y el Guard</h3>
+<h4 id="modificar-el-decorador-roles">Modificar el Decorador <code>Roles</code></h4>
+<p><strong>auth/roles.decorator.ts</strong></p>
+<pre><code class="language-typescript">import { SetMetadata } from '@nestjs/common';
+import { Role } from './roles.enum';
+
+export const Roles = (...roles: Role[]) =&gt; SetMetadata(ROLES_KEY, roles);
+</code></pre>
+<h4 id="modificar-el-guard-rolesguard">Modificar el Guard <code>RolesGuard</code></h4>
+<p>El guard permanece igual, pero ahora trabaja con valores del enum.</p>
+<h3 id="actualizar-el-controlador">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Roles } from '../auth/roles.decorator';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Role } from '../auth/roles.enum';
+
+@Controller('cats')
+@UseGuards(JwtAuthGuard, RolesGuard)
+export class CatsController {
+  @Roles(Role.Admin)
+  @Get('admin')
+  findAllAdmin() {
+    return this.catsService.findAll();
+  }
+
+  @Roles(Role.User, Role.Admin)
+  @Get()
+  findAll() {
+    return this.catsService.findAll();
+  }
+}
+</code></pre>
+<ul>
+<li><strong>Uso del Enum:</strong> Utilizamos <code>Role.Admin</code> y <code>Role.User</code> en lugar de cadenas de texto.</li>
+</ul>
+<hr />
+<h2 id="unir-varios-decoradores">Unir Varios Decoradores</h2>
+<h3 id="combinacion-de-decoradores">Combinación de Decoradores</h3>
+<p>Para simplificar aún más, podemos crear un decorador que combine la aplicación de los guards y la asignación de roles.</p>
+<h4 id="crear-un-decorador-auth">Crear un Decorador <code>Auth</code></h4>
+<p><strong>auth/auth.decorator.ts</strong></p>
+<pre><code class="language-typescript">import { applyDecorators, UseGuards } from '@nestjs/common';
+import { Roles } from './roles.decorator';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { RolesGuard } from './roles.guard';
+
+export function Auth(...roles: Role[]) {
+  return applyDecorators(
+    Roles(...roles),
+    UseGuards(JwtAuthGuard, RolesGuard),
+  );
+}
+</code></pre>
+<ul>
+<li><strong><code>applyDecorators</code>:</strong> Permite combinar múltiples decoradores en uno solo.</li>
+</ul>
+<h3 id="uso-del-decorador-auth">Uso del Decorador <code>Auth</code></h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get } from '@nestjs/common';
+import { Auth } from '../auth/auth.decorator';
+import { Role } from '../auth/roles.enum';
+
+@Controller('cats')
+export class CatsController {
+  @Auth(Role.Admin)
+  @Get('admin')
+  findAllAdmin() {
+    return this.catsService.findAll();
+  }
+
+  @Auth(Role.User, Role.Admin)
+  @Get()
+  findAll() {
+    return this.catsService.findAll();
+  }
+}
+</code></pre>
+<ul>
+<li>Ahora, con un solo decorador, aplicamos la autenticación y autorización.</li>
+</ul>
+<hr />
+<h2 id="ocultar-contrasena">Ocultar Contraseña</h2>
+<h3 id="excluir-la-contrasena-al-devolver-el-usuario">Excluir la Contraseña al Devolver el Usuario</h3>
+<p>Es una mala práctica devolver la contraseña (aunque esté hasheada) en las respuestas de la API.</p>
+<h4 id="utilizar-exclude-de-class-transformer">Utilizar Exclude de <code>class-transformer</code></h4>
+<p><strong>users/entities/user.entity.ts</strong></p>
+<pre><code class="language-typescript">import { Exclude } from 'class-transformer';
+
+@Entity()
+export class User {
+  // ...
+
+  @Exclude()
+  @Column()
+  password: string;
+}
+</code></pre>
+<ul>
+<li><strong><code>@Exclude()</code>:</strong> Indica que esta propiedad debe excluirse al transformar la entidad en JSON.</li>
+</ul>
+<h3 id="aplicar-transformacion-en-el-servicio">Aplicar Transformación en el Servicio</h3>
+<p>En los métodos que devuelven usuarios, utilizamos <code>class-transformer</code> para aplicar la exclusión.</p>
+<p><strong>users/users.service.ts</strong></p>
+<pre><code class="language-typescript">import { instanceToPlain } from 'class-transformer';
+
+async findOne(username: string): Promise&lt;User | undefined&gt; {
+  const user = await this.usersRepository.findOneBy({ username });
+  return user ? instanceToPlain(user) : undefined;
+}
+</code></pre>
+<hr />
+<h2 id="enum-roles-en-entidad">Enum Roles en Entidad</h2>
+<h3 id="definir-el-tipo-de-datos-de-role-en-la-entidad">Definir el Tipo de Datos de <code>role</code> en la Entidad</h3>
+<p>Podemos indicar que el campo <code>role</code> acepta solo valores definidos en el enum.</p>
+<p><strong>users/entities/user.entity.ts</strong></p>
+<pre><code class="language-typescript">import { Role } from '../../auth/roles.enum';
+
+@Entity()
+export class User {
+  // ...
+
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.User,
+  })
+  role: Role;
+}
+</code></pre>
+<ul>
+<li><strong><code>type: 'enum'</code>:</strong> Indica que el campo es de tipo enum en la base de datos.</li>
+<li><strong><code>enum: Role</code>:</strong> Especifica el enum a utilizar.</li>
+</ul>
+<h3 id="ventajas_1">Ventajas</h3>
+<ul>
+<li><strong>Integridad de Datos:</strong> La base de datos solo aceptará valores definidos en el enum.</li>
+<li><strong>Consistencia:</strong> Facilita el mantenimiento y reduce errores.</li>
+</ul>
+<hr />
+<h2 id="rol-admin-con-privilegios">Rol Admin con Privilegios</h2>
+<h3 id="implementacion-de-privilegios-para-el-rol-admin">Implementación de Privilegios para el Rol Admin</h3>
+<p>Ahora, aseguraremos que solo los usuarios con rol <code>admin</code> puedan acceder a ciertos recursos, como la creación de nuevos roles o la gestión de usuarios.</p>
+<h4 id="proteger-rutas-con-el-decorador-auth">Proteger Rutas con el Decorador <code>Auth</code></h4>
+<p><strong>users/users.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get, Post, Body } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { Auth } from '../auth/auth.decorator';
+import { Role } from '../auth/roles.enum';
+
+@Controller('users')
+export class UsersController {
+  constructor(private usersService: UsersService) {}
+
+  @Auth(Role.Admin)
+  @Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
+  @Auth(Role.Admin)
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
+  }
+}
+</code></pre>
+<ul>
+<li><strong>Solo Admin:</strong> Solo usuarios con rol <code>admin</code> pueden acceder a estas rutas.</li>
+</ul>
+<hr />
+<h2 id="decorador-request-user">Decorador Request User</h2>
+<h3 id="creando-un-decorador-user">Creando un Decorador <code>User</code></h3>
+<p>Para acceder al usuario autenticado de manera más sencilla, podemos crear un decorador personalizado.</p>
+<h4 id="definir-el-decorador-user">Definir el Decorador <code>User</code></h4>
+<p><strong>auth/user.decorator.ts</strong></p>
+<pre><code class="language-typescript">import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
+export const User = createParamDecorator(
+  (data, ctx: ExecutionContext) =&gt; {
+    const request = ctx.switchToHttp().getRequest();
+    return request.user;
+  },
+);
+</code></pre>
+<ul>
+<li><strong><code>createParamDecorator</code>:</strong> Crea un decorador de parámetros.</li>
+<li><strong><code>request.user</code>:</strong> Accedemos al usuario autenticado.</li>
+</ul>
+<h3 id="uso-del-decorador-en-el-controlador_1">Uso del Decorador en el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Get } from '@nestjs/common';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '../auth/user.decorator';
+
+@Controller('cats')
+export class CatsController {
+  @Auth()
+  @Get('profile')
+  getProfile(@User() user) {
+    return user;
+  }
+}
+</code></pre>
+<ul>
+<li><strong><code>@User() user</code>:</strong> Inyecta el usuario autenticado en el parámetro <code>user</code>.</li>
+</ul>
+<hr />
+<h2 id="breed-solo-rol-admin">Breed Solo Rol Admin</h2>
+<h3 id="control-de-acceso-en-operaciones-especificas">Control de Acceso en Operaciones Específicas</h3>
+<p>Podemos restringir ciertas operaciones, como la creación de nuevas razas (<code>breed</code>), solo a usuarios con rol <code>admin</code>.</p>
+<h4 id="definir-el-modulo-breeds">Definir el Módulo <code>Breeds</code></h4>
+<p>Supongamos que tenemos un módulo <code>Breeds</code> para gestionar las razas de gatos.</p>
+<p><strong>breeds/breeds.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Post, Body } from '@nestjs/common';
+import { Auth } from '../auth/auth.decorator';
+import { Role } from '../auth/roles.enum';
+
+@Controller('breeds')
+export class BreedsController {
+  @Auth(Role.Admin)
+  @Post()
+  create(@Body() createBreedDto: CreateBreedDto) {
+    // Lógica para crear una nueva raza
+  }
+}
+</code></pre>
+<ul>
+<li><strong>Restricción a Admin:</strong> Solo los administradores pueden crear nuevas razas.</li>
+</ul>
+<hr />
+<h2 id="relacion-entre-cat-y-user">Relación entre Cat y User</h2>
+<h3 id="asociar-los-gatos-cat-con-el-usuario-que-los-crea">Asociar los Gatos (<code>Cat</code>) con el Usuario que los Crea</h3>
+<p>Queremos que cada gato registrado esté asociado al usuario que lo creó.</p>
+<h4 id="modificar-la-entidad-cat">Modificar la Entidad <code>Cat</code></h4>
+<p><strong>cats/entities/cat.entity.ts</strong></p>
+<pre><code class="language-typescript">import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
+
+@Entity()
+export class Cat {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  name: string;
+
+  // Otras propiedades
+
+  @ManyToOne(() =&gt; User, (user) =&gt; user.cats)
+  owner: User;
+}
+</code></pre>
+<ul>
+<li><strong><code>@ManyToOne</code>:</strong> Indica una relación de muchos a uno con <code>User</code>.</li>
+<li><strong><code>owner</code>:</strong> Propiedad que referencia al usuario propietario del gato.</li>
+</ul>
+<h4 id="modificar-la-entidad-user_1">Modificar la Entidad <code>User</code></h4>
+<p><strong>users/entities/user.entity.ts</strong></p>
+<pre><code class="language-typescript">import { OneToMany } from 'typeorm';
+import { Cat } from '../../cats/entities/cat.entity';
+
+@Entity()
+export class User {
+  // ...
+
+  @OneToMany(() =&gt; Cat, (cat) =&gt; cat.owner)
+  cats: Cat[];
+}
+</code></pre>
+<ul>
+<li><strong><code>@OneToMany</code>:</strong> Indica que un usuario puede tener muchos gatos.</li>
+</ul>
+<h3 id="actualizar-el-metodo-create-en-catsservice">Actualizar el Método <code>create</code> en <code>CatsService</code></h3>
+<p><strong>cats/cats.service.ts</strong></p>
+<pre><code class="language-typescript">async create(createCatDto: CreateCatDto, user: User): Promise&lt;Cat&gt; {
+  const cat = this.catsRepository.create({ ...createCatDto, owner: user });
+  return this.catsRepository.save(cat);
+}
+</code></pre>
+<ul>
+<li>Asociamos el gato creado con el usuario que lo creó.</li>
+</ul>
+<h3 id="actualizar-el-controlador_1">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">import { Controller, Post, Body } from '@nestjs/common';
+import { Auth } from '../auth/auth.decorator';
+import { User } from '../auth/user.decorator';
+
+@Controller('cats')
+export class CatsController {
+  @Auth()
+  @Post()
+  create(@Body() createCatDto: CreateCatDto, @User() user: User) {
+    return this.catsService.create(createCatDto, user);
+  }
+}
+</code></pre>
+<ul>
+<li>Inyectamos el usuario autenticado y lo pasamos al servicio.</li>
+</ul>
+<hr />
+<h2 id="metodos-findall-cat">Métodos findAll Cat</h2>
+<h3 id="filtrar-gatos-por-usuario">Filtrar Gatos por Usuario</h3>
+<p>Queremos que los usuarios solo puedan ver los gatos que ellos mismos crearon, a menos que sean administradores.</p>
+<h4 id="modificar-el-metodo-findall-en-catsservice">Modificar el Método <code>findAll</code> en <code>CatsService</code></h4>
+<p><strong>cats/cats.service.ts</strong></p>
+<pre><code class="language-typescript">async findAll(user: User): Promise&lt;Cat[]&gt; {
+  if (user.role === Role.Admin) {
+    return this.catsRepository.find({ relations: ['owner'] });
+  }
+  return this.catsRepository.find({
+    where: { owner: { id: user.id } },
+    relations: ['owner'],
+  });
+}
+</code></pre>
+<ul>
+<li><strong>Admin:</strong> Si el usuario es admin, devuelve todos los gatos.</li>
+<li><strong>Usuario Regular:</strong> Devuelve solo los gatos que pertenecen al usuario.</li>
+</ul>
+<h3 id="actualizar-el-controlador_2">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">@Auth()
+@Get()
+findAll(@User() user: User) {
+  return this.catsService.findAll(user);
+}
+</code></pre>
+<hr />
+<h2 id="metodo-findone-cat">Método findOne Cat</h2>
+<h3 id="restringir-acceso-al-metodo-findone">Restringir Acceso al Método <code>findOne</code></h3>
+<p>Al obtener un gato por ID, debemos asegurarnos de que el usuario tenga permiso para verlo.</p>
+<h4 id="modificar-el-metodo-findone-en-catsservice">Modificar el Método <code>findOne</code> en <code>CatsService</code></h4>
+<p><strong>cats/cats.service.ts</strong></p>
+<pre><code class="language-typescript">async findOne(id: number, user: User): Promise&lt;Cat&gt; {
+  const cat = await this.catsRepository.findOne({
+    where: { id },
+    relations: ['owner'],
+  });
+  if (!cat) {
+    throw new NotFoundException('Cat not found');
+  }
+  if (user.role !== Role.Admin &amp;&amp; cat.owner.id !== user.id) {
+    throw new ForbiddenException('Access denied');
+  }
+  return cat;
+}
+</code></pre>
+<ul>
+<li><strong>Verificación de Propiedad:</strong> Si el usuario no es el propietario y no es admin, se deniega el acceso.</li>
+</ul>
+<h3 id="actualizar-el-controlador_3">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">@Auth()
+@Get(':id')
+findOne(@Param('id') id: number, @User() user: User) {
+  return this.catsService.findOne(+id, user);
+}
+</code></pre>
+<hr />
+<h2 id="actualizar-cat">Actualizar Cat</h2>
+<h3 id="control-de-acceso-en-actualizacion">Control de Acceso en Actualización</h3>
+<p>Solo el propietario o un administrador pueden actualizar un gato.</p>
+<h4 id="modificar-el-metodo-update-en-catsservice">Modificar el Método <code>update</code> en <code>CatsService</code></h4>
+<p><strong>cats/cats.service.ts</strong></p>
+<pre><code class="language-typescript">async update(id: number, updateCatDto: UpdateCatDto, user: User): Promise&lt;Cat&gt; {
+  const cat = await this.findOne(id, user);
+  Object.assign(cat, updateCatDto);
+  return this.catsRepository.save(cat);
+}
+</code></pre>
+<ul>
+<li><strong>Reutilizamos <code>findOne</code>:</strong> Garantiza que el usuario tiene permiso para actualizar.</li>
+<li><strong>Actualización:</strong> Modificamos los campos y guardamos.</li>
+</ul>
+<h3 id="actualizar-el-controlador_4">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">@Auth()
+@Patch(':id')
+update(@Param('id') id: number, @Body() updateCatDto: UpdateCatDto, @User() user: User) {
+  return this.catsService.update(+id, updateCatDto, user);
+}
+</code></pre>
+<hr />
+<h2 id="eliminar-cat">Eliminar Cat</h2>
+<h3 id="control-de-acceso-en-eliminacion">Control de Acceso en Eliminación</h3>
+<p>Solo el propietario o un administrador pueden eliminar un gato.</p>
+<h4 id="modificar-el-metodo-remove-en-catsservice">Modificar el Método <code>remove</code> en <code>CatsService</code></h4>
+<p><strong>cats/cats.service.ts</strong></p>
+<pre><code class="language-typescript">async remove(id: number, user: User): Promise&lt;void&gt; {
+  const cat = await this.findOne(id, user);
+  await this.catsRepository.remove(cat);
+}
+</code></pre>
+<ul>
+<li><strong>Verificación de Permisos:</strong> Utilizamos <code>findOne</code> para validar.</li>
+<li><strong>Eliminación:</strong> Eliminamos el registro de la base de datos.</li>
+</ul>
+<h3 id="actualizar-el-controlador_5">Actualizar el Controlador</h3>
+<p><strong>cats/cats.controller.ts</strong></p>
+<pre><code class="language-typescript">@Auth()
+@Delete(':id')
+remove(@Param('id') id: number, @User() user: User) {
+  return this.catsService.remove(+id, user);
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
