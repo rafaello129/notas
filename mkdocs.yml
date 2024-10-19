@@ -7,13 +7,19 @@ nav:
       - Nest:
           - "Aprendizaje3/Back/nest/Nest semana1 Guía.md"
           - "Aprendizaje3/Back/nest/semana1.md"
+          - "Aprendizaje3/Back/nest/semana 2.md"
+          - "Aprendizaje3/Back/nest/Nest Semana 2 Guía.md"
+          - "Aprendizaje3/Back/nest/semana 3.md"            
+          - "Aprendizaje3/Back/nest/Nest Semana 3 Guía.md"                     
   - Front:
       - Basico:
           - "Aprendizaje3/Front/Basico/Ejemplo guiado.md"
           - "Aprendizaje3/Front/Basico/Interpretación del curso.md"
           - "Aprendizaje3/Front/Basico/Semana 1.md"
-  
-         
+          - "Aprendizaje3/Front/Basico/semana 2.md" 
+          - "Aprendizaje3/Front/Basico/JS y TS semana 2 Guía.md"
+      - React:
+          - "Aprendizaje3/Front/React/Introducción.md"
   - General:
       - "Aprendizaje3/General/Instalación de Git.md"
       - "Aprendizaje3/General/Requisitos Generales.md"
